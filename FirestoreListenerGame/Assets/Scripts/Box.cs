@@ -7,7 +7,9 @@ public class Box : MonoBehaviour
     public CameraController cameraController = null;
     public CameraShake cameraShake = null;
 
-    public float maxToLoad = 100.0f;
+    public float minToLoad, maxToLoad = 0.0f;
+    public float currentToLoad = 100.0f;
+
     public float increaseLoadPerTick = 1.0f;
     public float heartBeatValue = 0.25f;
     public float heartBeatTimeStep = 2.0f;
@@ -154,11 +156,12 @@ public class Box : MonoBehaviour
                 anglesCount = 0;
 
                 game.currentPlayer.rotations++;
-                if (game.currentPlayer.rotations == 1)
-                    Debug.Log("You can interact with the CAMERA now");
 
                 if (game.currentPlayer.rotations < 5)
                 {
+                    if (game.currentPlayer.rotations == 1)
+                        Debug.Log("You can interact with the CAMERA now");
+
                     // Move the camera close
                     switch (game.currentPlayer.currentPlayer)
                     {
@@ -269,7 +272,7 @@ public class Box : MonoBehaviour
                     // Shake the camera
                     if (cameraShake.timer <= 0.0f)
                     {
-                        cameraShake.Shake(game.currentPlayer, 5.0f, 1.0f, 10.0f);
+                        cameraShake.Shake(game.currentPlayer, 1.0f, 0.5f, 5.0f);
                         Debug.Log("Shake!");
                     }
                 }
@@ -330,8 +333,15 @@ public class Box : MonoBehaviour
         currentLoaded += increaseLoadPerTick;
 
         // normalized values
-        normalizedLoaded = currentLoaded * 1.0f / maxToLoad;
-        normalizedTimeStepLoaded = currentLoaded * heartBeatTimeStep / maxToLoad;
+        normalizedLoaded = currentLoaded * 1.0f / currentToLoad;
+        normalizedTimeStepLoaded = currentLoaded * heartBeatTimeStep / currentToLoad;
         normalizedTimeStepLoaded = heartBeatTimeStep - normalizedTimeStepLoaded;
+
+        // Explode?
+        if (currentLoaded >= maxToLoad)
+        {
+            currentLoaded = 0.0f;
+            currentToLoad = Random.Range(minToLoad, maxToLoad);
+        }
     }
 }
