@@ -220,4 +220,17 @@ public class CameraShake : MonoBehaviour
                 break;
         }
     }
+
+    public void StopShake()
+    {
+        timer = 0.0f;
+
+        if (currentNoise != null)
+        {
+            currentNoise.m_AmplitudeGain = 0.0f;
+            currentNoise.m_FrequencyGain = 0.0f;
+
+            currentNoise = null;
+        }
+    }
 }

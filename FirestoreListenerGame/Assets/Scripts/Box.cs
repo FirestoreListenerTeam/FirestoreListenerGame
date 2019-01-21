@@ -325,8 +325,14 @@ public class Box : MonoBehaviour
 
     public void MaxShake()
     {
-        cameraShake.Shake(game.currentPlayer, 5.0f, 1.0f, 15.0f);
+        cameraShake.Shake(game.currentPlayer, 5.0f, 1.0f, 10.0f);
         Debug.Log("Max shake!");
+    }
+
+    public void StopShake()
+    {
+        cameraShake.StopShake();
+        Debug.Log("Stop shake!");
     }
 
     void HeartVibration()
@@ -392,6 +398,9 @@ public class Box : MonoBehaviour
             currentToLoad = Random.Range(minToLoad, maxToLoad);
 
             Debug.Log("You died! Next currentToLoad: " + currentToLoad);
+
+            SetMaxVibration();
+            MaxShake();
 
             // Reset variables
             switch (game.currentPlayer.currentPlayer)

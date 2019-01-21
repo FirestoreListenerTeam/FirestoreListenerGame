@@ -303,9 +303,6 @@ public class Game : MonoBehaviour
 
             case PlayState.waitDie:
 
-                box.SetMaxVibration();
-                box.MaxShake();
-
                 playState = PlayState.die;
 
                 break;
@@ -328,6 +325,7 @@ public class Game : MonoBehaviour
                 Debug.Log("waitLightOff");
 
                 box.StopVibration();
+                box.StopShake();
 
                 if (!gameController.box_despawned)
                 {
