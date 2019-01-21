@@ -71,6 +71,7 @@ public class CameraController : MonoBehaviour
                 box.can = false;
                 gameController.DespawnBox();
                 game.currentPlayer.rotations = 0;
+                game.currentPlayer.currentCamera = Player.CurrentCamera.a;
                 game.playState = Game.PlayState.waitLightOff;
             }
             else if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
@@ -96,8 +97,44 @@ public class CameraController : MonoBehaviour
                 box.can = false;
                 gameController.DespawnBox();
                 game.currentPlayer.rotations = 0;
+                game.currentPlayer.currentCamera = Player.CurrentCamera.a;
                 game.playState = Game.PlayState.waitLightOff;
             }
+        }
+    }
+
+    public void ResetPlayerCamera(Player.CurrentPlayer currentPlayer)
+    {
+        switch (currentPlayer)
+        {
+            case Player.CurrentPlayer.p1:
+                animator.SetBool("to1", false);
+                animator.SetBool("to1b", false);
+                animator.SetBool("to1c", false);
+                animator.SetBool("to1d", false);
+                animator.SetBool("to1e", false);
+                break;
+            case Player.CurrentPlayer.p2:
+                animator.SetBool("to2", false);
+                animator.SetBool("to2b", false);
+                animator.SetBool("to2c", false);
+                animator.SetBool("to2d", false);
+                animator.SetBool("to2e", false);
+                break;
+            case Player.CurrentPlayer.p3:
+                animator.SetBool("to3", false);
+                animator.SetBool("to3b", false);
+                animator.SetBool("to3c", false);
+                animator.SetBool("to3d", false);
+                animator.SetBool("to3e", false);
+                break;
+            case Player.CurrentPlayer.p4:
+                animator.SetBool("to4", false);
+                animator.SetBool("to4b", false);
+                animator.SetBool("to4c", false);
+                animator.SetBool("to4d", false);
+                animator.SetBool("to4e", false);
+                break;
         }
     }
 }

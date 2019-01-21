@@ -127,7 +127,7 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    void Shake(Player currentPlayer, float duration, float amplitude, float frequency)
+    public void Shake(Player currentPlayer, float duration, float amplitude, float frequency)
     {
         this.duration = duration;
         this.amplitude = amplitude;

@@ -4,6 +4,8 @@ using XInputDotNetPure;
 public class Box : MonoBehaviour
 {
     public Game game = null;
+    public CameraController cameraController = null;
+    public CameraShake cameraShake = null;
 
     public float maxToLoad = 100.0f;
     public float increaseLoadPerTick = 1.0f;
@@ -148,6 +150,119 @@ public class Box : MonoBehaviour
                 game.currentPlayer.rotations++;
                 if (game.currentPlayer.rotations == 1)
                     Debug.Log("You can interact with the CAMERA now");
+
+                if (game.currentPlayer.rotations < 5)
+                {
+                    // Move the camera close
+                    switch (game.currentPlayer.currentPlayer)
+                    {
+                        case Player.CurrentPlayer.p1:
+                            switch (game.currentPlayer.currentCamera)
+                            {
+                                case Player.CurrentCamera.a:
+                                    cameraController.animator.SetBool("to1b", true);
+                                    Debug.Log("to1b");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.b;
+                                    break;
+                                case Player.CurrentCamera.b:
+                                    cameraController.animator.SetBool("to1c", true);
+                                    Debug.Log("to1c");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.c;
+                                    break;
+                                case Player.CurrentCamera.c:
+                                    cameraController.animator.SetBool("to1d", true);
+                                    Debug.Log("to1d");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.d;
+                                    break;
+                                case Player.CurrentCamera.d:
+                                    cameraController.animator.SetBool("to1e", true);
+                                    Debug.Log("to1e");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.e;
+                                    break;
+                            }
+                            break;
+                        case Player.CurrentPlayer.p2:
+                            switch (game.currentPlayer.currentCamera)
+                            {
+                                case Player.CurrentCamera.a:
+                                    cameraController.animator.SetBool("to2b", true);
+                                    Debug.Log("to2b");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.b;
+                                    break;
+                                case Player.CurrentCamera.b:
+                                    cameraController.animator.SetBool("to2c", true);
+                                    Debug.Log("to2c");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.c;
+                                    break;
+                                case Player.CurrentCamera.c:
+                                    cameraController.animator.SetBool("to2d", true);
+                                    Debug.Log("to2d");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.d;
+                                    break;
+                                case Player.CurrentCamera.d:
+                                    cameraController.animator.SetBool("to2e", true);
+                                    Debug.Log("to2e");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.e;
+                                    break;
+                            }
+                            break;
+                        case Player.CurrentPlayer.p3:
+                            switch (game.currentPlayer.currentCamera)
+                            {
+                                case Player.CurrentCamera.a:
+                                    cameraController.animator.SetBool("to3b", true);
+                                    Debug.Log("to3b");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.b;
+                                    break;
+                                case Player.CurrentCamera.b:
+                                    cameraController.animator.SetBool("to3c", true);
+                                    Debug.Log("to3c");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.c;
+                                    break;
+                                case Player.CurrentCamera.c:
+                                    cameraController.animator.SetBool("to3d", true);
+                                    Debug.Log("to3d");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.d;
+                                    break;
+                                case Player.CurrentCamera.d:
+                                    cameraController.animator.SetBool("to3e", true);
+                                    Debug.Log("to3e");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.e;
+                                    break;
+                            }
+                            break;
+                        case Player.CurrentPlayer.p4:
+                            switch (game.currentPlayer.currentCamera)
+                            {
+                                case Player.CurrentCamera.a:
+                                    cameraController.animator.SetBool("to4b", true);
+                                    Debug.Log("to4b");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.b;
+                                    break;
+                                case Player.CurrentCamera.b:
+                                    cameraController.animator.SetBool("to4c", true);
+                                    Debug.Log("to4c");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.c;
+                                    break;
+                                case Player.CurrentCamera.c:
+                                    cameraController.animator.SetBool("to4d", true);
+                                    Debug.Log("to4d");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.d;
+                                    break;
+                                case Player.CurrentCamera.d:
+                                    cameraController.animator.SetBool("to4e", true);
+                                    Debug.Log("to4e");
+                                    game.currentPlayer.currentCamera = Player.CurrentCamera.e;
+                                    break;
+                            }
+                            break;
+                    }                 
+                }
+                else
+                {
+                    // Shake the camera
+                    //cameraShake.Shake(game.currentPlayer, )
+                }
             }
         }
 

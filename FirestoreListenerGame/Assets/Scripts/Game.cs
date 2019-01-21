@@ -72,6 +72,8 @@ public class Game : MonoBehaviour
         players[2].currentCamera = Player.CurrentCamera.a;
         players[3].currentPlayer = Player.CurrentPlayer.p4;
         players[3].currentCamera = Player.CurrentCamera.a;
+
+        currentPlayer = nextPlayer = players[0];
     }
 
     void Update()
@@ -148,6 +150,8 @@ public class Game : MonoBehaviour
                             break;
                     }
 
+                    cameraController.animator.SetBool("toScene", false);
+
                     gameState = GameState.play;
                     playState = PlayState.waitLightOn;
                 }
@@ -167,6 +171,42 @@ public class Game : MonoBehaviour
         switch (playState)
         {
             case PlayState.waitLightOn:
+
+                if (!currentPlayer.active)
+                {
+                    nextPlayer = currentPlayer;
+
+                    switch (currentPlayer.currentPlayer)
+                    {
+                        case Player.CurrentPlayer.p1:
+                            if (nextPlayer.currentPlayer == Player.CurrentPlayer.p4)
+                                currentPlayer = players[1];
+                            else if (nextPlayer.currentPlayer == Player.CurrentPlayer.p2)
+                                currentPlayer = players[3];
+                            break;
+                        case Player.CurrentPlayer.p2:
+                            if (nextPlayer.currentPlayer == Player.CurrentPlayer.p3)
+                                currentPlayer = players[0];
+                            else if (nextPlayer.currentPlayer == Player.CurrentPlayer.p1)
+                                currentPlayer = players[2];
+                            break;
+                        case Player.CurrentPlayer.p3:
+                            if (nextPlayer.currentPlayer == Player.CurrentPlayer.p4)
+                                currentPlayer = players[1];
+                            else if (nextPlayer.currentPlayer == Player.CurrentPlayer.p2)
+                                currentPlayer = players[3];
+                            break;
+                        case Player.CurrentPlayer.p4:
+                            if (nextPlayer.currentPlayer == Player.CurrentPlayer.p3)
+                                currentPlayer = players[0];
+                            else if (nextPlayer.currentPlayer == Player.CurrentPlayer.p1)
+                                currentPlayer = players[2];
+                            break;
+                    }
+
+                    playState = PlayState.lightOn;
+                    break;
+                }
 
                 if (timer >= waitLightOnSeconds)
                 {
@@ -271,35 +311,31 @@ public class Game : MonoBehaviour
 
             case PlayState.moveCamera:
 
+                Player lastPlayer = currentPlayer;
                 currentPlayer = nextPlayer;
+                nextPlayer = lastPlayer;
 
                 switch (currentPlayer.currentPlayer)
                 {
                     case Player.CurrentPlayer.p1:
                         cameraController.animator.SetBool("to1", true);
-                        cameraController.animator.SetBool("to2", false);
-                        cameraController.animator.SetBool("to3", false);
-                        cameraController.animator.SetBool("to4", false);
+                        Debug.Log("Current player = 1");
                         break;
                     case Player.CurrentPlayer.p2:
-                        cameraController.animator.SetBool("to1", false);
                         cameraController.animator.SetBool("to2", true);
-                        cameraController.animator.SetBool("to3", false);
-                        cameraController.animator.SetBool("to4", false);
+                        Debug.Log("Current player = 2");
                         break;
                     case Player.CurrentPlayer.p3:
-                        cameraController.animator.SetBool("to1", false);
-                        cameraController.animator.SetBool("to2", false);
                         cameraController.animator.SetBool("to3", true);
-                        cameraController.animator.SetBool("to4", false);
+                        Debug.Log("Current player = 3");
                         break;
                     case Player.CurrentPlayer.p4:
-                        cameraController.animator.SetBool("to1", false);
-                        cameraController.animator.SetBool("to2", false);
-                        cameraController.animator.SetBool("to3", false);
                         cameraController.animator.SetBool("to4", true);
+                        Debug.Log("Current player = 4");
                         break;
                 }
+
+                cameraController.ResetPlayerCamera(lastPlayer.currentPlayer);
 
                 playState = PlayState.waitLightOn;
 

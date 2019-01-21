@@ -1092,6 +1092,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 890663437}
+  cameraController: {fileID: 2037067225}
+  cameraShake: {fileID: 2037067226}
   maxToLoad: 100
   increaseLoadPerTick: 1
   heartBeatValue: 0.25
@@ -4645,6 +4647,7 @@ GameObject:
   - component: {fileID: 2037067224}
   - component: {fileID: 2037067223}
   - component: {fileID: 2037067225}
+  - component: {fileID: 2037067226}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -4699,6 +4702,37 @@ MonoBehaviour:
   box: {fileID: 511061941}
   animator: {fileID: 2037067223}
   can: 0
+--- !u!114 &2037067226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2037067222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3595e1eca6a51498624709cafcf573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera1: {fileID: 501861752}
+  virtualCamera2: {fileID: 790782826}
+  virtualCamera3: {fileID: 406744542}
+  virtualCamera4: {fileID: 2061303085}
+  virtualCamera1b: {fileID: 132261833}
+  virtualCamera2b: {fileID: 66126488}
+  virtualCamera3b: {fileID: 2023393991}
+  virtualCamera4b: {fileID: 905268037}
+  virtualCamera1c: {fileID: 2118364847}
+  virtualCamera2c: {fileID: 750989040}
+  virtualCamera3c: {fileID: 1633545085}
+  virtualCamera4c: {fileID: 1576651207}
+  virtualCamera1d: {fileID: 1149295717}
+  virtualCamera2d: {fileID: 1650444921}
+  virtualCamera3d: {fileID: 1344501573}
+  virtualCamera4d: {fileID: 806103437}
+  virtualCamera1e: {fileID: 1478530919}
+  virtualCamera2e: {fileID: 1066651056}
+  virtualCamera3e: {fileID: 163678603}
+  virtualCamera4e: {fileID: 1889457656}
 --- !u!1 &2061303084
 GameObject:
   m_ObjectHideFlags: 0
