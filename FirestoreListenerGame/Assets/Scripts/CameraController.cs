@@ -46,34 +46,67 @@ public class CameraController : MonoBehaviour
         if (can)
         {
             // Detect if a button was pressed this frame
-            if ((prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
-                || (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed))
+            if (prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
             {
-                switch (game.currentPlayer)
+                switch (game.currentPlayer.currentPlayer)
                 {
-                    case Game.CurrentPlayer.p1:
-                        game.currentPlayer = Game.CurrentPlayer.p2;
-                        animator.SetBool("to1", false);
-                        animator.SetBool("to2", true);
-                        animator.SetBool("to3", false);
-                        animator.SetBool("to4", false);
-                        break;
-                    case Game.CurrentPlayer.p2:
-                        game.currentPlayer = Game.CurrentPlayer.p3;
-                        animator.SetBool("to1", false);
-                        animator.SetBool("to2", false);
-                        animator.SetBool("to3", true);
-                        animator.SetBool("to4", false);
-                        break;
-                    case Game.CurrentPlayer.p3:
-                        game.currentPlayer = Game.CurrentPlayer.p4;
+                    case Player.CurrentPlayer.p1:
+                        game.currentPlayer = game.players[1];
                         animator.SetBool("to1", false);
                         animator.SetBool("to2", false);
                         animator.SetBool("to3", false);
                         animator.SetBool("to4", true);
                         break;
-                    case Game.CurrentPlayer.p4:
-                        game.currentPlayer = Game.CurrentPlayer.p1;
+                    case Player.CurrentPlayer.p2:
+                        game.currentPlayer = game.players[2];
+                        animator.SetBool("to1", true);
+                        animator.SetBool("to2", false);
+                        animator.SetBool("to3", false);
+                        animator.SetBool("to4", false);
+                        break;
+                    case Player.CurrentPlayer.p3:
+                        game.currentPlayer = game.players[3];
+                        animator.SetBool("to1", false);
+                        animator.SetBool("to2", true);
+                        animator.SetBool("to3", false);
+                        animator.SetBool("to4", false);
+                        break;
+                    case Player.CurrentPlayer.p4:
+                        game.currentPlayer = game.players[0];
+                        animator.SetBool("to1", false);
+                        animator.SetBool("to2", false);
+                        animator.SetBool("to3", false);
+                        animator.SetBool("to4", true);
+                        break;
+                }
+            }
+            else if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
+            {
+                switch (game.currentPlayer.currentPlayer)
+                {
+                    case Player.CurrentPlayer.p1:
+                        game.currentPlayer = game.players[1];
+                        animator.SetBool("to1", false);
+                        animator.SetBool("to2", true);
+                        animator.SetBool("to3", false);
+                        animator.SetBool("to4", false);
+                        break;
+                    case Player.CurrentPlayer.p2:
+                        game.currentPlayer = game.players[2];
+                        animator.SetBool("to1", false);
+                        animator.SetBool("to2", false);
+                        animator.SetBool("to3", true);
+                        animator.SetBool("to4", false);
+                        break;
+                    case Player.CurrentPlayer.p3:
+                        game.currentPlayer = game.players[3];
+                        animator.SetBool("to1", false);
+                        animator.SetBool("to2", false);
+                        animator.SetBool("to3", false);
+                        animator.SetBool("to4", true);
+                        break;
+                    case Player.CurrentPlayer.p4:
+                        game.currentPlayer = game.players[0];
                         animator.SetBool("to1", true);
                         animator.SetBool("to2", false);
                         animator.SetBool("to3", false);

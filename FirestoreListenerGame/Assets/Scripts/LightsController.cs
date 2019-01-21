@@ -74,39 +74,39 @@ public class LightsController : MonoBehaviour
         }
     }
 
-    public void LightOn(Game.CurrentPlayer currentPlayer)
+    public void LightOn(Player.CurrentPlayer currentPlayer)
     {
         switch (currentPlayer)
         {
-            case Game.CurrentPlayer.p1:
+            case Player.CurrentPlayer.p1:
                 light1.SetActive(true);
                 break;
-            case Game.CurrentPlayer.p2:
+            case Player.CurrentPlayer.p2:
                 light2.SetActive(true);
                 break;
-            case Game.CurrentPlayer.p3:
+            case Player.CurrentPlayer.p3:
                 light3.SetActive(true);
                 break;
-            case Game.CurrentPlayer.p4:
+            case Player.CurrentPlayer.p4:
                 light4.SetActive(true);
                 break;
         }
     }
 
-    public void LightOff(Game.CurrentPlayer currentPlayer)
+    public void LightOff(Player.CurrentPlayer currentPlayer)
     {
         switch (currentPlayer)
         {
-            case Game.CurrentPlayer.p1:
+            case Player.CurrentPlayer.p1:
                 light1.SetActive(false);
                 break;
-            case Game.CurrentPlayer.p2:
+            case Player.CurrentPlayer.p2:
                 light2.SetActive(false);
                 break;
-            case Game.CurrentPlayer.p3:
+            case Player.CurrentPlayer.p3:
                 light3.SetActive(false);
                 break;
-            case Game.CurrentPlayer.p4:
+            case Player.CurrentPlayer.p4:
                 light4.SetActive(false);
                 break;
         }
