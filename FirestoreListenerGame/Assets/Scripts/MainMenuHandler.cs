@@ -32,7 +32,7 @@ public class MainMenuHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        if (!playerIndexSet || !prevState.IsConnected)
+        /*if (!playerIndexSet || !prevState.IsConnected)
         {
             for (int i = 0; i < 4; ++i)
             {
@@ -79,8 +79,8 @@ public class MainMenuHandler : MonoBehaviour {
             // Y Pressed
             how_to_play_btn.transform.SetAsLastSibling();
             how_to_play_animator.SetBool("how_to_play_in", true);
-        }
-        /*
+        }*/
+
         if (Input.GetKeyDown("1"))
         {
             // Like A Pressed
@@ -103,6 +103,6 @@ public class MainMenuHandler : MonoBehaviour {
         if (Input.GetKeyDown("4"))
         {
             how_to_play_animator.SetBool("how_to_play_in", false);
-        }*/
+        }
 	}
 }
