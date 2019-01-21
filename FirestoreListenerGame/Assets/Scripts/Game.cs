@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
 {
     public GameObject choose_color_lbl;
     public GameObject choose_color_timer_lbl;
+    float choose_color_timer = 10.0f;
 
     public CameraController cameraController = null;
     public LightsController lightsController = null;
@@ -82,14 +83,17 @@ public class Game : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        choose_color_timer -= Time.deltaTime;
 
         switch (gameState)
         {
             case GameState.chooseColour:
 
                 // TODO: choose character
+                // TODO: FOLLOW THIS
+                //choose_color_timer_lbl.GetComponent<GUIText>()
 
-                if (timer >= 2.0f)
+                if (choose_color_timer <= 0.0f)
                 {
                     timer = 0.0f;
                     lightsController.LightsOn();
