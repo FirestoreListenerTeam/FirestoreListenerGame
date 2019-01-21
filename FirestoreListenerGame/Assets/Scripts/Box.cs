@@ -34,6 +34,7 @@ public class Box : MonoBehaviour
     int anglesCount = 0;
 
     public bool can = false;
+    public bool beat = false;
 
     bool playerIndexSet = false;
     PlayerIndex playerIndex;
@@ -266,12 +267,14 @@ public class Box : MonoBehaviour
                 else
                 {
                     // Shake the camera
-                    //cameraShake.Shake(game.currentPlayer, )
+                    cameraShake.Shake(game.currentPlayer, 5.0f, 10.0f, 10.0f);
+                    Debug.Log("Shake!");
                 }
             }
         }
 
-        HeartVibration();
+        if (beat)
+            HeartVibration();
     }
 
     void HeartVibration()

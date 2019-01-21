@@ -133,6 +133,8 @@ public class CameraShake : MonoBehaviour
         this.amplitude = amplitude;
         this.frequency = frequency;
 
+        timer = duration;
+
         switch (currentPlayer.currentPlayer)
         {
             case Player.CurrentPlayer.p1:

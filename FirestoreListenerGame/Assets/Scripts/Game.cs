@@ -152,6 +152,7 @@ public class Game : MonoBehaviour
 
                     cameraController.animator.SetBool("toScene", false);
 
+                    box.beat = true;
                     gameState = GameState.play;
                     playState = PlayState.waitLightOn;
                 }
