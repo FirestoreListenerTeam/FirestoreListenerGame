@@ -21,6 +21,10 @@ public class MainMenuHandler : MonoBehaviour {
     GamePadState state;
     GamePadState prevState;
 
+    //timers stuff
+    float start_timer = 3.0f;
+    float exit_timer = 3.0f;
+
 	// Use this for initialization
 	void Start () {
         credits_animator = credits_btn.GetComponent<Animator>();
@@ -31,6 +35,24 @@ public class MainMenuHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(start_animator.GetBool("play_in")){
+            start_timer -= Time.deltaTime;
+            if(start_timer < 0.0f){
+                // START GAME
+                Application.LoadLevel("RealMainScene");
+            }
+        }
+
+        if (start_animator.GetBool("exit_in"))
+        {
+            exit_timer -= Time.deltaTime;
+            if (exit_timer < 0.0f)
+            {
+                // END GAME
+                Application.Quit();
+            }
+        }
         
         /*if (!playerIndexSet || !prevState.IsConnected)
         {
@@ -103,6 +125,17 @@ public class MainMenuHandler : MonoBehaviour {
         if (Input.GetKeyDown("4"))
         {
             how_to_play_animator.SetBool("how_to_play_in", false);
+        }
+
+        if (Input.GetKeyDown("5"))
+        {
+            start_btn.transform.SetAsLastSibling();
+            start_animator.SetBool("play_in", true);
+        }
+        if (Input.GetKeyDown("6"))
+        {
+            exit_btn.transform.SetAsLastSibling();
+            exit_animator.SetBool("exit_in", true);
         }
 	}
 }
