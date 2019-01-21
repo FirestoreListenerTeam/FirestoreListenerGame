@@ -6,6 +6,8 @@ using XInputDotNetPure;
 public class CameraController : MonoBehaviour
 {
     public Game game = null;
+    public GameController gameController = null;
+    public Box box = null;
     public Animator animator = null;
 
     public bool can = false;
@@ -33,7 +35,7 @@ public class CameraController : MonoBehaviour
                 GamePadState testState = GamePad.GetState(testPlayerIndex);
                 if (testState.IsConnected)
                 {
-                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+                    //Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
                     playerIndex = testPlayerIndex;
                     playerIndexSet = true;
                 }
@@ -51,68 +53,50 @@ public class CameraController : MonoBehaviour
                 switch (game.currentPlayer.currentPlayer)
                 {
                     case Player.CurrentPlayer.p1:
-                        game.currentPlayer = game.players[1];
-                        animator.SetBool("to1", false);
-                        animator.SetBool("to2", false);
-                        animator.SetBool("to3", false);
-                        animator.SetBool("to4", true);
+                        game.nextPlayer = game.players[3];
                         break;
                     case Player.CurrentPlayer.p2:
-                        game.currentPlayer = game.players[2];
-                        animator.SetBool("to1", true);
-                        animator.SetBool("to2", false);
-                        animator.SetBool("to3", false);
-                        animator.SetBool("to4", false);
+                        game.nextPlayer = game.players[0];
                         break;
                     case Player.CurrentPlayer.p3:
-                        game.currentPlayer = game.players[3];
-                        animator.SetBool("to1", false);
-                        animator.SetBool("to2", true);
-                        animator.SetBool("to3", false);
-                        animator.SetBool("to4", false);
+                        game.nextPlayer = game.players[1];
                         break;
                     case Player.CurrentPlayer.p4:
-                        game.currentPlayer = game.players[0];
-                        animator.SetBool("to1", false);
-                        animator.SetBool("to2", false);
-                        animator.SetBool("to3", false);
-                        animator.SetBool("to4", true);
+                        game.nextPlayer = game.players[2];
                         break;
                 }
+
+                // Reset variables
+                can = false;
+                box.can = false;
+                gameController.DespawnBox();
+                game.currentPlayer.rotations = 0;
+                game.playState = Game.PlayState.waitLightOff;
             }
             else if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
             {
                 switch (game.currentPlayer.currentPlayer)
                 {
                     case Player.CurrentPlayer.p1:
-                        game.currentPlayer = game.players[1];
-                        animator.SetBool("to1", false);
-                        animator.SetBool("to2", true);
-                        animator.SetBool("to3", false);
-                        animator.SetBool("to4", false);
+                        game.nextPlayer = game.players[1];
                         break;
                     case Player.CurrentPlayer.p2:
-                        game.currentPlayer = game.players[2];
-                        animator.SetBool("to1", false);
-                        animator.SetBool("to2", false);
-                        animator.SetBool("to3", true);
-                        animator.SetBool("to4", false);
+                        game.nextPlayer = game.players[2];
                         break;
                     case Player.CurrentPlayer.p3:
-                        game.currentPlayer = game.players[3];
-                        animator.SetBool("to1", false);
-                        animator.SetBool("to2", false);
-                        animator.SetBool("to3", false);
-                        animator.SetBool("to4", true);
+                        game.nextPlayer = game.players[3];
                         break;
                     case Player.CurrentPlayer.p4:
-                        game.currentPlayer = game.players[0];
-                        animator.SetBool("to1", true);
-                        animator.SetBool("to2", false);
-                        animator.SetBool("to3", false);
-                        animator.SetBool("to4", false);
+                        game.nextPlayer = game.players[0];
                         break;
                 }
+
+                // Reset variables
+                can = false;
+                box.can = false;
+                gameController.DespawnBox();
+                game.currentPlayer.rotations = 0;
+                game.playState = Game.PlayState.waitLightOff;
             }
         }
     }
