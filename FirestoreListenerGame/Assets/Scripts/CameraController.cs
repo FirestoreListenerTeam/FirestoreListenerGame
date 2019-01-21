@@ -5,9 +5,9 @@ using XInputDotNetPure;
 
 public class CameraController : MonoBehaviour
 {
+    public Game game = null;
+
     private Animator animator = null;
-    private enum CurrentPlayer { p1, p2, p3, p4 };
-    private CurrentPlayer currentPlayer = CurrentPlayer.p1;
 
     // Controller
     bool playerIndexSet = false;
@@ -48,31 +48,31 @@ public class CameraController : MonoBehaviour
         if ((prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
             || (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed))
         {
-            switch (currentPlayer)
+            switch (game.currentPlayer)
             {
-                case CurrentPlayer.p1:
-                    currentPlayer = CurrentPlayer.p2;
+                case Game.CurrentPlayer.p1:
+                    game.currentPlayer = Game.CurrentPlayer.p2;
                     animator.SetBool("to1", false);
                     animator.SetBool("to2", true);
                     animator.SetBool("to3", false);
                     animator.SetBool("to4", false);
                     break;
-                case CurrentPlayer.p2:
-                    currentPlayer = CurrentPlayer.p3;
+                case Game.CurrentPlayer.p2:
+                    game.currentPlayer = Game.CurrentPlayer.p3;
                     animator.SetBool("to1", false);
                     animator.SetBool("to2", false);
                     animator.SetBool("to3", true);
                     animator.SetBool("to4", false);
                     break;
-                case CurrentPlayer.p3:
-                    currentPlayer = CurrentPlayer.p4;
+                case Game.CurrentPlayer.p3:
+                    game.currentPlayer = Game.CurrentPlayer.p4;
                     animator.SetBool("to1", false);
                     animator.SetBool("to2", false);
                     animator.SetBool("to3", false);
                     animator.SetBool("to4", true);
                     break;
-                case CurrentPlayer.p4:
-                    currentPlayer = CurrentPlayer.p1;
+                case Game.CurrentPlayer.p4:
+                    game.currentPlayer = Game.CurrentPlayer.p1;
                     animator.SetBool("to1", true);
                     animator.SetBool("to2", false);
                     animator.SetBool("to3", false);
