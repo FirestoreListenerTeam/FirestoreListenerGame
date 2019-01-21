@@ -18,11 +18,12 @@ public class GameController : MonoBehaviour {
 
     public Animator box_animator;
 
-    static 
+
 
 	// Use this for initialization
 	void Start () {
         // Get any component if needed
+        box_animator.StopPlayback();
 	}
 	
 	// Update is called once per frame
@@ -58,6 +59,7 @@ public class GameController : MonoBehaviour {
             {
                 box_spawned = false;
                 //box_animator.Play()
+                box_animator.Play("box_squishy");
             }
         }
 

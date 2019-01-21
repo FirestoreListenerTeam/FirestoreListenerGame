@@ -327,7 +327,7 @@ MonoBehaviour:
   chair_4: {fileID: 1329168654}
   box_y_spawn_position: 5
   box_y_velocity: 0.2
-  box_animator: {fileID: 0}
+  box_animator: {fileID: 658212777}
 --- !u!4 &343352151
 Transform:
   m_ObjectHideFlags: 0
