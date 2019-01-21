@@ -52,7 +52,8 @@ public class CameraShake : MonoBehaviour
     private float duration = 0.0f;
     private float amplitude = 0.0f;
     private float frequency = 0.0f;
-    private float timer = 0.0f;
+
+    public float timer = 0.0f;
 
     private Cinemachine.CinemachineBasicMultiChannelPerlin currentNoise;
 

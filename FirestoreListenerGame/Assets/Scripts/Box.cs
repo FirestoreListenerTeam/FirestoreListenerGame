@@ -267,8 +267,11 @@ public class Box : MonoBehaviour
                 else
                 {
                     // Shake the camera
-                    cameraShake.Shake(game.currentPlayer, 5.0f, 10.0f, 10.0f);
-                    Debug.Log("Shake!");
+                    if (cameraShake.timer <= 0.0f)
+                    {
+                        cameraShake.Shake(game.currentPlayer, 5.0f, 1.0f, 10.0f);
+                        Debug.Log("Shake!");
+                    }
                 }
             }
         }
