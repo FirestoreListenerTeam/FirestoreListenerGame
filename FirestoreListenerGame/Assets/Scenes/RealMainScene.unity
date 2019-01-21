@@ -1267,6 +1267,7 @@ MonoBehaviour:
   gameController: {fileID: 343352150}
   minToLoad: 100
   maxToLoad: 200
+  clank: {fileID: 0}
   increaseLoadPerTick: 1
   crankCooldown: 1
   heartBeatValue: 0.25
@@ -1621,7 +1622,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
@@ -2800,6 +2801,7 @@ MonoBehaviour:
   box: {fileID: 511061941}
   gameState: 0
   playState: 1
+  numPlayers: 0
   lightsSeconds: 5
   lightSeconds: 2
   waitLightOnSeconds: 3
