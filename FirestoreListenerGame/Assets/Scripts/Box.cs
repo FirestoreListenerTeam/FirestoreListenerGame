@@ -7,6 +7,8 @@ public class Box : MonoBehaviour
     public CameraController cameraController = null;
     public CameraShake cameraShake = null;
 
+    public GameObject clank;
+
     public float maxToLoad = 100.0f;
     public float increaseLoadPerTick = 1.0f;
     public float crankCooldown = 1.0f;
@@ -16,6 +18,9 @@ public class Box : MonoBehaviour
     private float currentLoaded = 0.0f;
     bool cooldownOn = false;
     float timerCooldown = 0.0f;
+    
+    float prevIncreasedAngle;
+    float offsetAngleDegrees = 5.0f;
 
     #region HeartVibVars
     private float normalizedLoaded;
@@ -74,6 +79,21 @@ public class Box : MonoBehaviour
                 !cooldownOn)
             {
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
+
+                // Clank rotation
+                if (angle >= prevIncreasedAngle + offsetAngleDegrees)
+                {
+                    float toIncrease = angle - prevIncreasedAngle;
+                    prevIncreasedAngle = angle;
+
+                    float yRotation = clank.transform.eulerAngles.y;
+                    yRotation += toIncrease;
+                    if (yRotation > 360)
+                        yRotation -= 360;
+
+                    transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
+                }
+                //--------
 
                 if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
                 {
@@ -155,7 +175,7 @@ public class Box : MonoBehaviour
 
             if (cooldownOn)
             {
-                timerCooldown += 1 * Time.deltaTime;
+                timerCooldown += 1.0f * Time.deltaTime;
 
                 if (timerCooldown > crankCooldown)
                 {
