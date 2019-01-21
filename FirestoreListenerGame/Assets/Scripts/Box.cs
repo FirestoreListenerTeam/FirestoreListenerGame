@@ -3,8 +3,8 @@ using XInputDotNetPure;
 
 public class Box : MonoBehaviour
 {
-
     public float maxToLoad = 100.0f;
+    public float increaseLoadPerTick = 1.0f;
     public float heartBeatValue = 0.25f;
     public float heartBeatTimeStep = 2.0f;
 
@@ -17,7 +17,12 @@ public class Box : MonoBehaviour
     float timerHeartVibration = 0.0f;
     #endregion
 
-    float prevAngle = 0.0f;
+    enum angles { oneEighth, twoEighth, threeEighth, fourEighth, fiveEighth,
+                  sixEighth, sevenEighth, eightEighth, noAngle }
+
+    angles currentAngle = angles.noAngle;
+    
+    int anglesCount = 0;
 
     bool playerIndexSet = false;
     PlayerIndex playerIndex;
@@ -26,7 +31,6 @@ public class Box : MonoBehaviour
 
     void Update()
     {
-
         if (!playerIndexSet || !prevState.IsConnected)
         {
             for (int i = 0; i < 4; ++i)
@@ -45,29 +49,94 @@ public class Box : MonoBehaviour
         prevState = state;
         state = GamePad.GetState(playerIndex);
 
-
-        if (state.ThumbSticks.Right.X > 0 ||
-            state.ThumbSticks.Right.X < 0 ||
-            state.ThumbSticks.Right.Y > 0 ||
-            state.ThumbSticks.Right.Y < 0)
+        // Thumbstick tick
+        if (state.ThumbSticks.Right.X > 0.0f ||
+            state.ThumbSticks.Right.X < 0.0f ||
+            state.ThumbSticks.Right.Y > 0.0f ||
+            state.ThumbSticks.Right.Y < 0.0f)
         {
             float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
-            Debug.Log(angle);
 
-            // 0, 45, 90, 135, 180, 225, 270, 315, 360
-
-            prevAngle = angle;
+            if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
+            {
+                if (currentAngle != angles.noAngle)
+                {
+                    IncreaseLoad();
+                    anglesCount++;
+                }
+                currentAngle = angles.oneEighth;    
+            }
+            else if (angle >= 45.0f && angle < 90.0f && currentAngle != angles.twoEighth && (currentAngle == angles.noAngle || currentAngle == angles.oneEighth))
+            {
+                if (currentAngle != angles.noAngle)
+                {
+                    IncreaseLoad();
+                    anglesCount++;
+                }
+                currentAngle = angles.twoEighth;
+            }
+            else if(angle >= 90.0f && angle < 135.0f && currentAngle != angles.threeEighth && (currentAngle == angles.noAngle || currentAngle == angles.twoEighth))
+            {
+                if (currentAngle != angles.noAngle)
+                {
+                    IncreaseLoad();
+                    anglesCount++;
+                }
+                currentAngle = angles.threeEighth;
+            }
+            else if(angle >= 135.0f && angle < 180.0f && currentAngle != angles.fourEighth && (currentAngle == angles.noAngle || currentAngle == angles.threeEighth))
+            {
+                if (currentAngle != angles.noAngle)
+                {
+                    IncreaseLoad();
+                    anglesCount++;
+                }
+                currentAngle = angles.fourEighth;
+            }
+            else if (angle >= 180.0f && angle < 225.0f && currentAngle != angles.fiveEighth && (currentAngle == angles.noAngle || currentAngle == angles.fourEighth))
+            {
+                if (currentAngle != angles.noAngle)
+                {
+                    IncreaseLoad();
+                    anglesCount++;
+                }
+                currentAngle = angles.fiveEighth;
+            }
+            else if (angle >= 225.0f && angle < 270.0f && currentAngle != angles.sixEighth && (currentAngle == angles.noAngle || currentAngle == angles.fiveEighth))
+            {
+                if (currentAngle != angles.noAngle)
+                {
+                    IncreaseLoad();
+                    anglesCount++;
+                }
+                currentAngle = angles.sixEighth;
+            }
+            else if (angle >= 270.0f && angle < 315.0 && currentAngle != angles.sevenEighth && (currentAngle == angles.noAngle || currentAngle == angles.sixEighth))
+            {
+                if (currentAngle != angles.noAngle)
+                {
+                    IncreaseLoad();
+                    anglesCount++;
+                }
+                currentAngle = angles.sevenEighth;
+            }
+            else if (angle >= 315.0f && angle < 360.0f && currentAngle != angles.eightEighth && (currentAngle == angles.noAngle || currentAngle == angles.sevenEighth))
+            {
+                if (currentAngle != angles.noAngle)
+                {
+                    IncreaseLoad();
+                    anglesCount++;
+                }
+                currentAngle = angles.eightEighth;
+            }
         }
-
-        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
+        else // Set to default
         {
-            currentLoaded += 5.0f;
-
-            // normalized values
-            normalizedLoaded = currentLoaded * 1.0f / maxToLoad;
-            normalizedTimeStepLoaded = currentLoaded * heartBeatTimeStep / maxToLoad;
-            normalizedTimeStepLoaded = heartBeatTimeStep - normalizedTimeStepLoaded;
+            currentAngle = angles.noAngle;
         }
+
+        if (anglesCount == 8)
+            anglesCount = 0;
 
         HeartVibration();
     }
@@ -103,5 +172,15 @@ public class Box : MonoBehaviour
         if (value < 0) value += 360f;
 
         return value;
+    }
+
+    public void IncreaseLoad()
+    {
+        currentLoaded += increaseLoadPerTick;
+
+        // normalized values
+        normalizedLoaded = currentLoaded * 1.0f / maxToLoad;
+        normalizedTimeStepLoaded = currentLoaded * heartBeatTimeStep / maxToLoad;
+        normalizedTimeStepLoaded = heartBeatTimeStep - normalizedTimeStepLoaded;
     }
 }
