@@ -6,6 +6,7 @@ public class Game : MonoBehaviour
 {
     public CameraController cameraController = null;
     public LightsController lightsController = null;
+    public GameController gameController = null;
 
     public enum CurrentPlayer { p1, p2, p3, p4 };
     public CurrentPlayer currentPlayer = CurrentPlayer.p1;
@@ -13,15 +14,19 @@ public class Game : MonoBehaviour
     private enum GameState { chooseColour, randomLights, oneLight, play };
     private GameState gameState = GameState.chooseColour;
 
-    private float timer = 0.0f;
+    private enum PlayState { dropBox, interactBox };
+    private PlayState playState = PlayState.dropBox;
 
-    // Choose colour
+    private float timer = 0.0f;
 
     // Random lights
     public float lightsSeconds = 0.0f;
 
     // One light
     public float lightSeconds = 0.0f;
+
+    // Interact box
+    public uint rotations = 0;
 	
 	void Update()
     {
@@ -98,15 +103,54 @@ public class Game : MonoBehaviour
                     }
 
                     gameState = GameState.play;
+                    playState = PlayState.dropBox;
                 }
 
                 break;
 
             case GameState.play:
 
-                // TODO
+                Play();
 
                 break;
         }
 	}
+
+    void Play()
+    {
+        switch (playState)
+        {
+            case PlayState.dropBox:
+
+                switch (currentPlayer)
+                {
+                    case CurrentPlayer.p1:
+                        gameController.SpawnBoxInChair1();
+                        break;
+                    case CurrentPlayer.p2:
+                        gameController.SpawnBoxInChair2();
+                        break;
+                    case CurrentPlayer.p3:
+                        gameController.SpawnBoxInChair3();
+                        break;
+                    case CurrentPlayer.p4:
+                        gameController.SpawnBoxInChair4();
+                        break;
+                }
+
+                playState = PlayState.interactBox;
+
+                break;
+
+            case PlayState.interactBox:
+
+                if (!gameController.box_spawned)
+                {
+                    //box.can = true;
+                    //box: una volta feta
+                }
+
+                break;
+        }
+    }
 }

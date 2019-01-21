@@ -14,8 +14,8 @@ public class GameController : MonoBehaviour {
     public float box_y_spawn_position = 5f;
     public float box_y_velocity = 0.2f;
 
-    private bool box_spawned = false;
-    private bool box_despawned = false;
+    public bool box_spawned = false;
+    public bool box_despawned = false;
 
     public Animator box_animator;
 
