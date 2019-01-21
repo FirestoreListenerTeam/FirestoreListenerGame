@@ -19,15 +19,23 @@ public class Game : MonoBehaviour
     public CameraController cameraController = null;
     public LightsController lightsController = null;
     public GameController gameController = null;
+    public Box box = null;
 
     public Player[] players = null;
     public Player currentPlayer = null;
+    public Player nextPlayer = null;
 
-    private enum GameState { chooseColour, randomLights, oneLight, play };
-    private GameState gameState = GameState.chooseColour;
+    public enum GameState { chooseColour, randomLights, oneLight, play };
+    public GameState gameState = GameState.chooseColour;
 
-    private enum PlayState { waitForBox, dropBox, interactBox };
-    private PlayState playState = PlayState.dropBox;
+    public enum PlayState {
+        waitLightOn, lightOn,
+        waitDropBox, dropBox,
+        interactBox,
+        waitLightOff, lightOff,
+        waitMoveCamera, moveCamera
+    };
+    public PlayState playState = PlayState.dropBox;
 
     private float timer = 0.0f;
 
@@ -37,11 +45,17 @@ public class Game : MonoBehaviour
     // One light
     public float lightSeconds = 0.0f;
 
-    // Wait for box
-    public float waitForBoxSeconds = 0.0f;
+    // Wait light on
+    public float waitLightOnSeconds = 0.0f;
 
-    // Interact box
-    public uint rotations = 0;
+    // Wait drop box
+    public float waitDropBoxSeconds = 0.0f;
+
+    // Wait light off
+    public float waitLightOffSeconds = 0.0f;
+
+    // Wait move camera
+    public float waitMoveCameraSeconds = 0.0f;
 
     void Start()
     {
@@ -135,7 +149,7 @@ public class Game : MonoBehaviour
                     }
 
                     gameState = GameState.play;
-                    playState = PlayState.waitForBox;
+                    playState = PlayState.waitLightOn;
                 }
 
                 break;
@@ -152,9 +166,28 @@ public class Game : MonoBehaviour
     {
         switch (playState)
         {
-            case PlayState.waitForBox:
+            case PlayState.waitLightOn:
 
-                if (timer >= waitForBoxSeconds)
+                if (timer >= waitLightOnSeconds)
+                {
+                    timer = 0.0f;
+
+                    playState = PlayState.lightOn;
+                }
+
+                break;
+
+            case PlayState.lightOn:
+
+                lightsController.LightOn(currentPlayer.currentPlayer);
+
+                playState = PlayState.waitDropBox;
+
+                break;
+
+            case PlayState.waitDropBox:
+
+                if (timer >= waitDropBoxSeconds)
                 {
                     timer = 0.0f;
 
@@ -182,16 +215,93 @@ public class Game : MonoBehaviour
                 }
 
                 playState = PlayState.interactBox;
+                Debug.Log("You can interact with the BOX now");
 
                 break;
 
             case PlayState.interactBox:
 
+                // If the box is spawned...
                 if (!gameController.box_spawned)
                 {
-                    //box.can = true;
-                    //box: una volta feta
+                    // Can rotate box
+                    box.can = true;
+
+                    if (currentPlayer.rotations > 0)
+                        // Can move camera
+                        cameraController.can = true;
                 }
+
+                break;
+
+                // Despawn box
+
+            case PlayState.waitLightOff:
+
+                if (!gameController.box_despawned)
+                {
+                    if (timer >= waitLightOffSeconds)
+                    {
+                        timer = 0.0f;
+
+                        playState = PlayState.lightOff;
+                    }
+                }
+
+                break;
+
+            case PlayState.lightOff:
+
+                lightsController.LightOff(currentPlayer.currentPlayer);
+
+                playState = PlayState.waitMoveCamera;
+
+                break;
+
+            case PlayState.waitMoveCamera:
+
+                if (timer >= waitMoveCameraSeconds)
+                {
+                    timer = 0.0f;
+
+                    playState = PlayState.moveCamera;
+                }
+
+                break;
+
+            case PlayState.moveCamera:
+
+                currentPlayer = nextPlayer;
+
+                switch (currentPlayer.currentPlayer)
+                {
+                    case Player.CurrentPlayer.p1:
+                        cameraController.animator.SetBool("to1", true);
+                        cameraController.animator.SetBool("to2", false);
+                        cameraController.animator.SetBool("to3", false);
+                        cameraController.animator.SetBool("to4", false);
+                        break;
+                    case Player.CurrentPlayer.p2:
+                        cameraController.animator.SetBool("to1", false);
+                        cameraController.animator.SetBool("to2", true);
+                        cameraController.animator.SetBool("to3", false);
+                        cameraController.animator.SetBool("to4", false);
+                        break;
+                    case Player.CurrentPlayer.p3:
+                        cameraController.animator.SetBool("to1", false);
+                        cameraController.animator.SetBool("to2", false);
+                        cameraController.animator.SetBool("to3", true);
+                        cameraController.animator.SetBool("to4", false);
+                        break;
+                    case Player.CurrentPlayer.p4:
+                        cameraController.animator.SetBool("to1", false);
+                        cameraController.animator.SetBool("to2", false);
+                        cameraController.animator.SetBool("to3", false);
+                        cameraController.animator.SetBool("to4", true);
+                        break;
+                }
+
+                playState = PlayState.waitLightOn;
 
                 break;
         }
