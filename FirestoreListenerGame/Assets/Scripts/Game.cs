@@ -10,14 +10,18 @@ public class Game : MonoBehaviour
     public enum CurrentPlayer { p1, p2, p3, p4 };
     public CurrentPlayer currentPlayer = CurrentPlayer.p1;
 
-    private enum GameState { chooseColour, randomLights, oneLight };
+    private enum GameState { chooseColour, randomLights, oneLight, play };
     private GameState gameState = GameState.chooseColour;
+
+    private float timer = 0.0f;
 
     // Choose colour
 
     // Random lights
     public float lightsSeconds = 0.0f;
-    private float timer = 0.0f;   
+
+    // One light
+    public float lightSeconds = 0.0f;
 	
 	void Update()
     {
@@ -26,6 +30,8 @@ public class Game : MonoBehaviour
         switch (gameState)
         {
             case GameState.chooseColour:
+
+                // TODO: choose character
 
                 if (timer >= 2.0f)
                 {
@@ -62,7 +68,7 @@ public class Game : MonoBehaviour
                             break;
                     }
 
-                    lightsController.LightOn(currentPlayer);
+                    lightsController.LightOn(currentPlayer);                   
                     
                     gameState = GameState.oneLight;
                 }
@@ -70,6 +76,35 @@ public class Game : MonoBehaviour
                 break;
 
             case GameState.oneLight:
+
+                if (timer >= lightSeconds)
+                {
+                    timer = 0.0f;
+
+                    switch (currentPlayer)
+                    {
+                        case CurrentPlayer.p1:
+                            cameraController.animator.SetBool("to1", true);
+                            break;
+                        case CurrentPlayer.p2:
+                            cameraController.animator.SetBool("to2", true);
+                            break;
+                        case CurrentPlayer.p3:
+                            cameraController.animator.SetBool("to3", true);
+                            break;
+                        case CurrentPlayer.p4:
+                            cameraController.animator.SetBool("to4", true);
+                            break;
+                    }
+
+                    gameState = GameState.play;
+                }
+
+                break;
+
+            case GameState.play:
+
+                // TODO
 
                 break;
         }

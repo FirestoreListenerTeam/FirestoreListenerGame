@@ -6,8 +6,9 @@ using XInputDotNetPure;
 public class CameraController : MonoBehaviour
 {
     public Game game = null;
+    public Animator animator = null;
 
-    private Animator animator = null;
+    public bool can = false;
 
     // Controller
     bool playerIndexSet = false;
@@ -42,42 +43,43 @@ public class CameraController : MonoBehaviour
         prevState = state;
         state = GamePad.GetState(playerIndex);
 
-        // Start
-
-        // Detect if a button was pressed this frame
-        if ((prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
-            || (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed))
+        if (can)
         {
-            switch (game.currentPlayer)
+            // Detect if a button was pressed this frame
+            if ((prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
+                || (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed))
             {
-                case Game.CurrentPlayer.p1:
-                    game.currentPlayer = Game.CurrentPlayer.p2;
-                    animator.SetBool("to1", false);
-                    animator.SetBool("to2", true);
-                    animator.SetBool("to3", false);
-                    animator.SetBool("to4", false);
-                    break;
-                case Game.CurrentPlayer.p2:
-                    game.currentPlayer = Game.CurrentPlayer.p3;
-                    animator.SetBool("to1", false);
-                    animator.SetBool("to2", false);
-                    animator.SetBool("to3", true);
-                    animator.SetBool("to4", false);
-                    break;
-                case Game.CurrentPlayer.p3:
-                    game.currentPlayer = Game.CurrentPlayer.p4;
-                    animator.SetBool("to1", false);
-                    animator.SetBool("to2", false);
-                    animator.SetBool("to3", false);
-                    animator.SetBool("to4", true);
-                    break;
-                case Game.CurrentPlayer.p4:
-                    game.currentPlayer = Game.CurrentPlayer.p1;
-                    animator.SetBool("to1", true);
-                    animator.SetBool("to2", false);
-                    animator.SetBool("to3", false);
-                    animator.SetBool("to4", false);
-                    break;
+                switch (game.currentPlayer)
+                {
+                    case Game.CurrentPlayer.p1:
+                        game.currentPlayer = Game.CurrentPlayer.p2;
+                        animator.SetBool("to1", false);
+                        animator.SetBool("to2", true);
+                        animator.SetBool("to3", false);
+                        animator.SetBool("to4", false);
+                        break;
+                    case Game.CurrentPlayer.p2:
+                        game.currentPlayer = Game.CurrentPlayer.p3;
+                        animator.SetBool("to1", false);
+                        animator.SetBool("to2", false);
+                        animator.SetBool("to3", true);
+                        animator.SetBool("to4", false);
+                        break;
+                    case Game.CurrentPlayer.p3:
+                        game.currentPlayer = Game.CurrentPlayer.p4;
+                        animator.SetBool("to1", false);
+                        animator.SetBool("to2", false);
+                        animator.SetBool("to3", false);
+                        animator.SetBool("to4", true);
+                        break;
+                    case Game.CurrentPlayer.p4:
+                        game.currentPlayer = Game.CurrentPlayer.p1;
+                        animator.SetBool("to1", true);
+                        animator.SetBool("to2", false);
+                        animator.SetBool("to3", false);
+                        animator.SetBool("to4", false);
+                        break;
+                }
             }
         }
     }
