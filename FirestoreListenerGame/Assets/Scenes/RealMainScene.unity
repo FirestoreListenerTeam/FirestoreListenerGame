@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641275, b: 0.5748174, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -321,7 +321,8 @@ MonoBehaviour:
   chair_2: {fileID: 1430368248}
   chair_3: {fileID: 210820620}
   chair_4: {fileID: 1329168654}
-  box_y_spawn: 5
+  box_y_spawn_position: 5
+  box_y_velocity: 0.2
 --- !u!4 &343352151
 Transform:
   m_ObjectHideFlags: 0
@@ -541,6 +542,7 @@ GameObject:
   - component: {fileID: 658212775}
   - component: {fileID: 658212774}
   - component: {fileID: 658212773}
+  - component: {fileID: 658212777}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -615,6 +617,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &658212777
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 658212772}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3885e853bbb66429e948b83b1d1b58ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &787304560
 GameObject:
   m_ObjectHideFlags: 0
