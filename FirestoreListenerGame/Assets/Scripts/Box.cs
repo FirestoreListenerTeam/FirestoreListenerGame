@@ -6,10 +6,13 @@ public class Box : MonoBehaviour
     public Game game = null;
     public CameraController cameraController = null;
     public CameraShake cameraShake = null;
+    public GameController gameController = null;
 
+    public float minToLoad, maxToLoad = 0.0f;
+    private float currentToLoad = 100.0f;
+    
     public GameObject clank;
-
-    public float maxToLoad = 100.0f;
+    
     public float increaseLoadPerTick = 1.0f;
     public float crankCooldown = 1.0f;
     public float heartBeatValue = 0.25f;
@@ -48,6 +51,12 @@ public class Box : MonoBehaviour
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
+
+    void Start()
+    {
+        currentToLoad = Random.Range(minToLoad, maxToLoad);
+        Debug.Log("Next currentToLoad: " + currentToLoad);
+    }
 
     void Update()
     {
@@ -190,11 +199,12 @@ public class Box : MonoBehaviour
                 cooldownOn = true;
 
                 game.currentPlayer.rotations++;
-                if (game.currentPlayer.rotations == 1)
-                    Debug.Log("You can interact with the CAMERA now");
 
                 if (game.currentPlayer.rotations < 5)
                 {
+                    if (game.currentPlayer.rotations == 1)
+                        Debug.Log("You can interact with the CAMERA now");
+
                     // Move the camera close
                     switch (game.currentPlayer.currentPlayer)
                     {
@@ -305,7 +315,7 @@ public class Box : MonoBehaviour
                     // Shake the camera
                     if (cameraShake.timer <= 0.0f)
                     {
-                        cameraShake.Shake(game.currentPlayer, 5.0f, 1.0f, 10.0f);
+                        cameraShake.Shake(game.currentPlayer, 1.0f, 0.5f, 5.0f);
                         Debug.Log("Shake!");
                     }
                 }
@@ -366,8 +376,36 @@ public class Box : MonoBehaviour
         currentLoaded += increaseLoadPerTick;
 
         // normalized values
-        normalizedLoaded = currentLoaded * 1.0f / maxToLoad;
-        normalizedTimeStepLoaded = currentLoaded * heartBeatTimeStep / maxToLoad;
+        normalizedLoaded = currentLoaded * 1.0f / currentToLoad;
+        normalizedTimeStepLoaded = currentLoaded * heartBeatTimeStep / currentToLoad;
         normalizedTimeStepLoaded = heartBeatTimeStep - normalizedTimeStepLoaded;
+
+        // Explode?
+        if (currentLoaded >= maxToLoad)
+        {
+            currentLoaded = 0.0f;
+            currentToLoad = Random.Range(minToLoad, maxToLoad);
+
+            Debug.Log("You died! Next currentToLoad: " + currentToLoad);
+
+            // Reset variables
+            cameraController.can = false;
+            can = false;
+            gameController.DespawnBox();
+            game.currentPlayer.rotations = 0;
+            game.currentPlayer.currentCamera = Player.CurrentCamera.a;
+            game.currentPlayer.active = false;
+            game.playState = Game.PlayState.die;
+        }
+    }
+
+    public void SetMaxVibration()
+    {
+        GamePad.SetVibration(0, 1.0f, 1.0f);
+    }
+
+    public void StopVibration()
+    {
+        GamePad.SetVibration(0, 0.0f, 0.0f);
     }
 }
