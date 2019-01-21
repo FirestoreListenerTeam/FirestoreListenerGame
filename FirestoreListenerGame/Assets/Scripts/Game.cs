@@ -16,6 +16,9 @@ public class Player
 
 public class Game : MonoBehaviour
 {
+    public GameObject choose_color_lbl;
+    public GameObject choose_color_timer_lbl;
+
     public CameraController cameraController = null;
     public LightsController lightsController = null;
     public GameController gameController = null;
