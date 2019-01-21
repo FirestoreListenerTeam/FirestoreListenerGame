@@ -28,6 +28,7 @@ public class Game : MonoBehaviour
     public Player[] players = null;
     public Player currentPlayer = null;
     public Player nextPlayer = null;
+    public Player lastPlayer = null;
 
     public enum GameState { chooseColour, randomLights, oneLight, play };
     public GameState gameState = GameState.chooseColour;
@@ -36,11 +37,13 @@ public class Game : MonoBehaviour
         waitLightOn, lightOn,
         waitDropBox, dropBox,
         interactBox,
-        die,
+        waitDie, die,
         waitLightOff, lightOff,
         waitMoveCamera, moveCamera
     };
     public PlayState playState = PlayState.dropBox;
+
+    public uint numPlayers = 0;
 
     private float timer = 0.0f;
 
@@ -79,6 +82,8 @@ public class Game : MonoBehaviour
         players[3].currentCamera = Player.CurrentCamera.a;
 
         currentPlayer = nextPlayer = players[0];
+
+        numPlayers = 4; // TODO: set num players
     }
 
     void Update()
@@ -146,6 +151,8 @@ public class Game : MonoBehaviour
                 {
                     timer = 0.0f;
 
+                    cameraController.animator.SetBool("toScene", false);
+
                     switch (currentPlayer.currentPlayer)
                     {
                         case Player.CurrentPlayer.p1:
@@ -161,8 +168,6 @@ public class Game : MonoBehaviour
                             cameraController.animator.SetBool("to4", true);
                             break;
                     }
-
-                    cameraController.animator.SetBool("toScene", false);
 
                     box.beat = true;
                     gameState = GameState.play;
@@ -185,48 +190,49 @@ public class Game : MonoBehaviour
         {
             case PlayState.waitLightOn:
 
-                timer += Time.deltaTime;
-
-                if (!currentPlayer.active)
-                {
-                    nextPlayer = currentPlayer;
-
-                    switch (currentPlayer.currentPlayer)
-                    {
-                        case Player.CurrentPlayer.p1:
-                            if (nextPlayer.currentPlayer == Player.CurrentPlayer.p4)
-                                currentPlayer = players[1];
-                            else if (nextPlayer.currentPlayer == Player.CurrentPlayer.p2)
-                                currentPlayer = players[3];
-                            break;
-                        case Player.CurrentPlayer.p2:
-                            if (nextPlayer.currentPlayer == Player.CurrentPlayer.p3)
-                                currentPlayer = players[0];
-                            else if (nextPlayer.currentPlayer == Player.CurrentPlayer.p1)
-                                currentPlayer = players[2];
-                            break;
-                        case Player.CurrentPlayer.p3:
-                            if (nextPlayer.currentPlayer == Player.CurrentPlayer.p4)
-                                currentPlayer = players[1];
-                            else if (nextPlayer.currentPlayer == Player.CurrentPlayer.p2)
-                                currentPlayer = players[3];
-                            break;
-                        case Player.CurrentPlayer.p4:
-                            if (nextPlayer.currentPlayer == Player.CurrentPlayer.p3)
-                                currentPlayer = players[0];
-                            else if (nextPlayer.currentPlayer == Player.CurrentPlayer.p1)
-                                currentPlayer = players[2];
-                            break;
-                    }
-
-                    timer = 0.0f;
-
-                    playState = PlayState.lightOn;
-                    break;
-                }
+                timer += Time.deltaTime;              
 
                 if (timer >= waitLightOnSeconds)
                 {
+                    if (!currentPlayer.active)
+                    {
+                        Debug.Log("The player has died. The camera will move to the next player...");
+
+                        switch (currentPlayer.currentPlayer)
+                        {
+                            case Player.CurrentPlayer.p1:
+                                if (lastPlayer.currentPlayer == Player.CurrentPlayer.p4)
+                                    nextPlayer = players[1];
+                                else if (lastPlayer.currentPlayer == Player.CurrentPlayer.p2)
+                                    nextPlayer = players[3];
+                                break;
+                            case Player.CurrentPlayer.p2:
+                                if (lastPlayer.currentPlayer == Player.CurrentPlayer.p3)
+                                    nextPlayer = players[0];
+                                else if (lastPlayer.currentPlayer == Player.CurrentPlayer.p1)
+                                    nextPlayer = players[2];
+                                break;
+                            case Player.CurrentPlayer.p3:
+                                if (lastPlayer.currentPlayer == Player.CurrentPlayer.p4)
+                                    nextPlayer = players[1];
+                                else if (lastPlayer.currentPlayer == Player.CurrentPlayer.p2)
+                                    nextPlayer = players[3];
+                                break;
+                            case Player.CurrentPlayer.p4:
+                                if (lastPlayer.currentPlayer == Player.CurrentPlayer.p3)
+                                    nextPlayer = players[0];
+                                else if (lastPlayer.currentPlayer == Player.CurrentPlayer.p1)
+                                    nextPlayer = players[2];
+                                break;
+                        }
+
+                        timer = 0.0f;
+
+                        playState = PlayState.moveCamera;
+
+                        break;
+                    }
+
                     timer = 0.0f;
 
                     playState = PlayState.lightOn;
@@ -295,17 +301,22 @@ public class Game : MonoBehaviour
 
             // Despawn box
 
+            case PlayState.waitDie:
+
+                box.SetMaxVibration();
+                box.MaxShake();
+
+                playState = PlayState.die;
+
+                break;
+
             case PlayState.die:
 
                 timer += Time.deltaTime;
 
-                box.SetMaxVibration();
-
                 if (timer >= 5.0f) // TODO: PS
                 {
                     timer = 0.0f;
-
-                    box.StopVibration();
 
                     playState = PlayState.waitLightOff;
                 }
@@ -313,6 +324,10 @@ public class Game : MonoBehaviour
                 break;
 
             case PlayState.waitLightOff:
+
+                Debug.Log("waitLightOff");
+
+                box.StopVibration();
 
                 if (!gameController.box_despawned)
                 {
@@ -329,6 +344,8 @@ public class Game : MonoBehaviour
                 break;
 
             case PlayState.lightOff:
+
+                Debug.Log("lightOff");
 
                 lightsController.LightOff(currentPlayer.currentPlayer);
 
@@ -351,9 +368,12 @@ public class Game : MonoBehaviour
 
             case PlayState.moveCamera:
 
-                Player lastPlayer = currentPlayer;
+                Debug.Log("moveCamera");
+
+                lastPlayer = currentPlayer;
                 currentPlayer = nextPlayer;
-                nextPlayer = lastPlayer;
+
+                cameraController.ResetPlayerCamera(lastPlayer.currentPlayer);
 
                 switch (currentPlayer.currentPlayer)
                 {
@@ -375,11 +395,22 @@ public class Game : MonoBehaviour
                         break;
                 }
 
-                cameraController.ResetPlayerCamera(lastPlayer.currentPlayer);
-
                 playState = PlayState.waitLightOn;
 
                 break;
         }
+    }
+
+    public bool AllPlayersDead()
+    {
+        uint count = 0;
+
+        for (uint i = 0; i < 4; ++i)
+        {
+            if (!players[i].active)
+                count++;
+        }
+
+        return count == numPlayers - 1;
     }
 }

@@ -10,7 +10,9 @@ public class Box : MonoBehaviour
 
     public float minToLoad, maxToLoad = 0.0f;
     private float currentToLoad = 100.0f;
-
+    
+    public GameObject clank;
+    
     public float increaseLoadPerTick = 1.0f;
     public float crankCooldown = 1.0f;
     public float heartBeatValue = 0.25f;
@@ -19,6 +21,9 @@ public class Box : MonoBehaviour
     private float currentLoaded = 0.0f;
     bool cooldownOn = false;
     float timerCooldown = 0.0f;
+    
+    float prevIncreasedAngle;
+    float offsetAngleDegrees = 5.0f;
 
     #region HeartVibVars
     private float normalizedLoaded;
@@ -83,6 +88,21 @@ public class Box : MonoBehaviour
                 !cooldownOn)
             {
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
+
+                // Clank rotation
+                if (angle >= prevIncreasedAngle + offsetAngleDegrees)
+                {
+                    float toIncrease = angle - prevIncreasedAngle;
+                    prevIncreasedAngle = angle;
+
+                    float yRotation = clank.transform.eulerAngles.y;
+                    yRotation += toIncrease;
+                    if (yRotation > 360)
+                        yRotation -= 360;
+
+                    transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
+                }
+                //--------
 
                 if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
                 {
@@ -164,7 +184,7 @@ public class Box : MonoBehaviour
 
             if (cooldownOn)
             {
-                timerCooldown += 1 * Time.deltaTime;
+                timerCooldown += 1.0f * Time.deltaTime;
 
                 if (timerCooldown > crankCooldown)
                 {
@@ -292,18 +312,20 @@ public class Box : MonoBehaviour
                 }
                 else
                 {
-                    // Shake the camera
-                    if (cameraShake.timer <= 0.0f)
-                    {
-                        cameraShake.Shake(game.currentPlayer, 1.0f, 0.5f, 5.0f);
-                        Debug.Log("Shake!");
-                    }
+                    cameraShake.Shake(game.currentPlayer, 1.0f, 0.5f, 5.0f);
+                    Debug.Log("Shake!");
                 }
             }
         }
 
         if (beat)
             HeartVibration();
+    }
+
+    public void MaxShake()
+    {
+        cameraShake.Shake(game.currentPlayer, 5.0f, 1.0f, 15.0f);
+        Debug.Log("Max shake!");
     }
 
     void HeartVibration()
@@ -364,18 +386,43 @@ public class Box : MonoBehaviour
         if (currentLoaded >= maxToLoad)
         {
             currentLoaded = 0.0f;
+            normalizedLoaded = 0.0f;
+            normalizedTimeStepLoaded = 0.0f;
             currentToLoad = Random.Range(minToLoad, maxToLoad);
 
             Debug.Log("You died! Next currentToLoad: " + currentToLoad);
 
             // Reset variables
+            switch (game.currentPlayer.currentPlayer)
+            {
+                case Player.CurrentPlayer.p1:
+                    game.nextPlayer = game.players[1];
+                    break;
+                case Player.CurrentPlayer.p2:
+                    game.nextPlayer = game.players[2];
+                    break;
+                case Player.CurrentPlayer.p3:
+                    game.nextPlayer = game.players[3];
+                    break;
+                case Player.CurrentPlayer.p4:
+                    game.nextPlayer = game.players[0];
+                    break;
+            }
+
             cameraController.can = false;
             can = false;
             gameController.DespawnBox();
             game.currentPlayer.rotations = 0;
             game.currentPlayer.currentCamera = Player.CurrentCamera.a;
             game.currentPlayer.active = false;
-            game.playState = Game.PlayState.die;
+            game.playState = Game.PlayState.waitDie;
+
+            // Play again?
+            if (game.AllPlayersDead())
+            {
+                Debug.Log("All players died...");
+                // TODO: end of the game
+            }
         }
     }
 
