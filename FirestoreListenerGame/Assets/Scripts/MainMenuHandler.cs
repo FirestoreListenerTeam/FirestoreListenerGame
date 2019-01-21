@@ -54,7 +54,7 @@ public class MainMenuHandler : MonoBehaviour {
             }
         }
         
-        /*if (!playerIndexSet || !prevState.IsConnected)
+        if (!playerIndexSet || !prevState.IsConnected)
         {
             for (int i = 0; i < 4; ++i)
             {
@@ -74,36 +74,48 @@ public class MainMenuHandler : MonoBehaviour {
 
         // Detect if a button was pressed this frame
 
-        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
+        bool opened_panel = false;
+
+        if (credits_animator.GetBool("credits_in") || how_to_play_animator.GetBool("how_to_play_in"))
+            opened_panel = true;
+
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed && !opened_panel)
         {
             // A Pressed
             print("A PRESSED");
+            start_btn.transform.SetAsLastSibling();
+            start_animator.SetBool("play_in", true);
         }
 
         if (prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed)
         {
             // B Pressed
-            if(credits_animator.GetBool("credits_in") || how_to_play_animator.GetBool("how_to_play_in")){ // Any option opened
+            if(opened_panel){ // Any option opened
                 credits_animator.SetBool("credits_in", false);
                 how_to_play_animator.SetBool("how_to_play_in", false);
+            }else{
+                exit_btn.transform.SetAsLastSibling();
+                exit_animator.SetBool("exit_in", true);
             }
         }
 
-        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed)
+        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed && !opened_panel)
         {
             // X Pressed
             credits_btn.transform.SetAsLastSibling();
             credits_animator.SetBool("credits_in", true);
         }
 
-        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed)
+        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed && !opened_panel)
         {
             // Y Pressed
             how_to_play_btn.transform.SetAsLastSibling();
             how_to_play_animator.SetBool("how_to_play_in", true);
-        }*/
+        }
 
-        if (Input.GetKeyDown("1"))
+        // MAC TEST
+
+        /*if (Input.GetKeyDown("1"))
         {
             // Like A Pressed
             print("X PRESSED");
@@ -136,6 +148,6 @@ public class MainMenuHandler : MonoBehaviour {
         {
             exit_btn.transform.SetAsLastSibling();
             exit_animator.SetBool("exit_in", true);
-        }
+        }*/
 	}
 }
