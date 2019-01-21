@@ -51,9 +51,9 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 12.558094
+  m_Intensity: 2
+  m_Range: 20
+  m_SpotAngle: 25
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -66,7 +66,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -88,10 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9b9dbe7f5c3a49a9bcf5b23b31a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   radius: 1
-  minX: -10
-  maxX: 10
-  minZ: -10
-  maxZ: 10
+  minX: -20
+  maxX: 20
+  minZ: -20
+  maxZ: 20
   defaultY: 10
