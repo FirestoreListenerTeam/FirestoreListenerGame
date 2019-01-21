@@ -17,6 +17,8 @@ public class Box : MonoBehaviour
     float timerHeartVibration = 0.0f;
     #endregion
 
+    float prevAngle = 0.0f;
+
     bool playerIndexSet = false;
     PlayerIndex playerIndex;
     GamePadState state;
@@ -42,6 +44,20 @@ public class Box : MonoBehaviour
 
         prevState = state;
         state = GamePad.GetState(playerIndex);
+
+
+        if (state.ThumbSticks.Right.X > 0 ||
+            state.ThumbSticks.Right.X < 0 ||
+            state.ThumbSticks.Right.Y > 0 ||
+            state.ThumbSticks.Right.Y < 0)
+        {
+            float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
+            Debug.Log(angle);
+
+            // 0, 45, 90, 135, 180, 225, 270, 315, 360
+
+            prevAngle = angle;
+        }
 
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
@@ -79,5 +95,13 @@ public class Box : MonoBehaviour
                 timerHeartVibration = 0.0f;
             }
         }
+    }
+
+    public static float FindDegree(float x, float y)
+    {
+        float value = (float)((Mathf.Atan2(x, y) / Mathf.PI) * 180f);
+        if (value < 0) value += 360f;
+
+        return value;
     }
 }
