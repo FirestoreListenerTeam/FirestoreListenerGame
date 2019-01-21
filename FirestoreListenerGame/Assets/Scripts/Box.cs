@@ -11,10 +11,13 @@ public class Box : MonoBehaviour
     public float currentToLoad = 100.0f;
 
     public float increaseLoadPerTick = 1.0f;
+    public float crankCooldown = 1.0f;
     public float heartBeatValue = 0.25f;
     public float heartBeatTimeStep = 2.0f;
 
     private float currentLoaded = 0.0f;
+    bool cooldownOn = false;
+    float timerCooldown = 0.0f;
 
     #region HeartVibVars
     private float normalizedLoaded;
@@ -69,7 +72,8 @@ public class Box : MonoBehaviour
             if (state.ThumbSticks.Right.X > 0.0f ||
                 state.ThumbSticks.Right.X < 0.0f ||
                 state.ThumbSticks.Right.Y > 0.0f ||
-                state.ThumbSticks.Right.Y < 0.0f)
+                state.ThumbSticks.Right.Y < 0.0f &&
+                !cooldownOn)
             {
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
 
@@ -151,9 +155,21 @@ public class Box : MonoBehaviour
                 currentAngle = angles.noAngle;
             }
 
+            if (cooldownOn)
+            {
+                timerCooldown += 1 * Time.deltaTime;
+
+                if (timerCooldown > crankCooldown)
+                {
+                    cooldownOn = false;
+                    timerCooldown = 0.0f;
+                }
+            }
+
             if (anglesCount == 8)
             {
                 anglesCount = 0;
+                cooldownOn = true;
 
                 game.currentPlayer.rotations++;
 
