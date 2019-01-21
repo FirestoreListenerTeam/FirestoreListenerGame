@@ -24,7 +24,7 @@ public class MainMenuHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        if (!playerIndexSet || !prevState.IsConnected)
+        /*if (!playerIndexSet || !prevState.IsConnected)
         {
             for (int i = 0; i < 4; ++i)
             {
@@ -66,7 +66,7 @@ public class MainMenuHandler : MonoBehaviour {
         {
             // Y Pressed
 
-        }
+        }*/
 
         if (Input.GetKeyDown("1"))
         {
