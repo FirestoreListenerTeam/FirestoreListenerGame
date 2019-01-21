@@ -16,11 +16,13 @@ public class GameController : MonoBehaviour {
 
     private bool box_spawned = false;
 
+    public Animator box_animator;
+
     static 
 
 	// Use this for initialization
 	void Start () {
-		// Get any component if needed
+        // Get any component if needed
 	}
 	
 	// Update is called once per frame
@@ -52,8 +54,11 @@ public class GameController : MonoBehaviour {
 
         if(box_spawned){ // Make the box go down till the chair
             box.transform.position = new Vector3(box.transform.position.x, box.transform.position.y - box_y_velocity, box.transform.position.z);
-            if(box.transform.position.y < 2f)
+            if (box.transform.position.y < 2f)
+            {
                 box_spawned = false;
+                //box_animator.Play()
+            }
         }
 
 	}
