@@ -19,6 +19,11 @@ public class Box : MonoBehaviour
     float timerHeartVibration = 0.0f;
     #endregion
 
+    bool heartBeatPlayed = false;
+    bool heartBeat2Played = false;
+    public AudioClip heartBeat1, heartBeat2;
+    public AudioSource source;
+
     enum angles { oneEighth, twoEighth, threeEighth, fourEighth, fiveEighth,
                   sixEighth, sevenEighth, eightEighth, noAngle }
 
@@ -165,13 +170,25 @@ public class Box : MonoBehaviour
             if (timerHeartVibration < heartBeatValue)
             {
                 GamePad.SetVibration(0, 0, normalizedLoaded);
+                if (!heartBeatPlayed)
+                {
+                    source.PlayOneShot(heartBeat1);
+                    heartBeatPlayed = true;
+                }
             }
             else if (timerHeartVibration >= heartBeatValue && timerHeartVibration <= (heartBeatValue * 2))
             {
                 GamePad.SetVibration(0, normalizedLoaded, 0);
+                if (!heartBeat2Played)
+                {
+                    source.PlayOneShot(heartBeat2);
+                    heartBeat2Played = true;
+                }
             }
             else
             {
+                heartBeatPlayed = false;
+                heartBeat2Played = false;
                 GamePad.SetVibration(0, 0, 0);
                 timerStepHeart = 0.0f;
                 timerHeartVibration = 0.0f;
