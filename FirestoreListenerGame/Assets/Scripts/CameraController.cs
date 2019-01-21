@@ -42,6 +42,8 @@ public class CameraController : MonoBehaviour
         prevState = state;
         state = GamePad.GetState(playerIndex);
 
+        // Start
+
         // Detect if a button was pressed this frame
         if ((prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
             || (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed))
