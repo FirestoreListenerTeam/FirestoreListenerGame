@@ -90,6 +90,7 @@ public class Box : MonoBehaviour
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
 
                 // Clank rotation
+                /*
                 if (angle >= prevIncreasedAngle + offsetAngleDegrees)
                 {
                     float toIncrease = angle - prevIncreasedAngle;
@@ -101,7 +102,7 @@ public class Box : MonoBehaviour
                         yRotation -= 360;
 
                     transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
-                }
+                }*/
                 //--------
 
                 if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
