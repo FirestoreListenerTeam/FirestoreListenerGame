@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Priority: 10
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
-  m_AnimatedTarget: {fileID: 2037067223}
+  m_AnimatedTarget: {fileID: 0}
   m_LayerIndex: 0
   m_ShowDebugText: 0
   m_EnableAllChildCameras: 0
@@ -241,36 +241,12 @@ MonoBehaviour:
   - {fileID: 790782826}
   - {fileID: 406744542}
   - {fileID: 2061303085}
-  m_Instructions:
-  - m_FullHash: -1627948798
-    m_VirtualCamera: {fileID: 501861752}
-    m_ActivateAfter: 0
-    m_MinDuration: 0
-  - m_FullHash: 134097080
-    m_VirtualCamera: {fileID: 790782826}
-    m_ActivateAfter: 0
-    m_MinDuration: 0
-  - m_FullHash: 1895372846
-    m_VirtualCamera: {fileID: 406744542}
-    m_ActivateAfter: 0
-    m_MinDuration: 0
-  - m_FullHash: -291664499
-    m_VirtualCamera: {fileID: 2061303085}
-    m_ActivateAfter: 0
-    m_MinDuration: 0
+  m_Instructions: []
   m_DefaultBlend:
     m_Style: 1
     m_Time: 0.5
   m_CustomBlends: {fileID: 0}
-  m_ParentHash:
-  - m_Hash: -1627948798
-    m_ParentHash: 756556552
-  - m_Hash: 134097080
-    m_ParentHash: 756556552
-  - m_Hash: 1895372846
-    m_ParentHash: 756556552
-  - m_Hash: -291664499
-    m_ParentHash: 756556552
+  m_ParentHash: []
 --- !u!4 &288022136
 Transform:
   m_ObjectHideFlags: 0
@@ -376,7 +352,7 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
-  m_ComponentOwner: {fileID: 1604374834}
+  m_ComponentOwner: {fileID: 0}
 --- !u!4 &406744543
 Transform:
   m_ObjectHideFlags: 0
@@ -740,7 +716,7 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
-  m_ComponentOwner: {fileID: 847961482}
+  m_ComponentOwner: {fileID: 0}
 --- !u!4 &790782827
 Transform:
   m_ObjectHideFlags: 0
@@ -1422,7 +1398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 11.6, z: -58.499996}
+  m_FollowOffset: {x: 0, y: 0, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1563,7 +1539,7 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
-  m_ComponentOwner: {fileID: 552689151}
+  m_ComponentOwner: {fileID: 0}
 --- !u!4 &2061303086
 Transform:
   m_ObjectHideFlags: 0
