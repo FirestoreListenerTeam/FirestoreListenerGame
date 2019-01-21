@@ -36,6 +36,7 @@ public class Game : MonoBehaviour
         waitLightOn, lightOn,
         waitDropBox, dropBox,
         interactBox,
+        die,
         waitLightOff, lightOff,
         waitMoveCamera, moveCamera
     };
@@ -82,7 +83,6 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
         choose_color_timer -= Time.deltaTime;
 
         switch (gameState)
@@ -92,6 +92,7 @@ public class Game : MonoBehaviour
                 // TODO: choose character
                 // TODO: FOLLOW THIS
                 //choose_color_timer_lbl.GetComponent<GUIText>()
+                timer += Time.deltaTime;
 
                 if (choose_color_timer <= 0.0f)
                 {
@@ -104,6 +105,8 @@ public class Game : MonoBehaviour
                 break;
 
             case GameState.randomLights:
+
+                timer += Time.deltaTime;
 
                 if (timer >= lightsSeconds)
                 {
@@ -136,6 +139,8 @@ public class Game : MonoBehaviour
                 break;
 
             case GameState.oneLight:
+
+                timer += Time.deltaTime;
 
                 if (timer >= lightSeconds)
                 {
@@ -180,6 +185,8 @@ public class Game : MonoBehaviour
         {
             case PlayState.waitLightOn:
 
+                timer += Time.deltaTime;
+
                 if (!currentPlayer.active)
                 {
                     nextPlayer = currentPlayer;
@@ -212,6 +219,8 @@ public class Game : MonoBehaviour
                             break;
                     }
 
+                    timer = 0.0f;
+
                     playState = PlayState.lightOn;
                     break;
                 }
@@ -234,6 +243,8 @@ public class Game : MonoBehaviour
                 break;
 
             case PlayState.waitDropBox:
+
+                timer += Time.deltaTime;
 
                 if (timer >= waitDropBoxSeconds)
                 {
@@ -282,12 +293,31 @@ public class Game : MonoBehaviour
 
                 break;
 
-                // Despawn box
+            // Despawn box
+
+            case PlayState.die:
+
+                timer += Time.deltaTime;
+
+                box.SetMaxVibration();
+
+                if (timer >= 5.0f) // TODO: PS
+                {
+                    timer = 0.0f;
+
+                    box.StopVibration();
+
+                    playState = PlayState.waitLightOff;
+                }
+
+                break;
 
             case PlayState.waitLightOff:
 
                 if (!gameController.box_despawned)
                 {
+                    timer += Time.deltaTime;
+
                     if (timer >= waitLightOffSeconds)
                     {
                         timer = 0.0f;
@@ -307,6 +337,8 @@ public class Game : MonoBehaviour
                 break;
 
             case PlayState.waitMoveCamera:
+
+                timer += Time.deltaTime;
 
                 if (timer >= waitMoveCameraSeconds)
                 {

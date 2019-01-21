@@ -6,9 +6,10 @@ public class Box : MonoBehaviour
     public Game game = null;
     public CameraController cameraController = null;
     public CameraShake cameraShake = null;
+    public GameController gameController = null;
 
     public float minToLoad, maxToLoad = 0.0f;
-    public float currentToLoad = 100.0f;
+    private float currentToLoad = 100.0f;
 
     public float increaseLoadPerTick = 1.0f;
     public float crankCooldown = 1.0f;
@@ -45,6 +46,12 @@ public class Box : MonoBehaviour
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
+
+    void Start()
+    {
+        currentToLoad = Random.Range(minToLoad, maxToLoad);
+        Debug.Log("Next currentToLoad: " + currentToLoad);
+    }
 
     void Update()
     {
@@ -358,6 +365,27 @@ public class Box : MonoBehaviour
         {
             currentLoaded = 0.0f;
             currentToLoad = Random.Range(minToLoad, maxToLoad);
+
+            Debug.Log("You died! Next currentToLoad: " + currentToLoad);
+
+            // Reset variables
+            cameraController.can = false;
+            can = false;
+            gameController.DespawnBox();
+            game.currentPlayer.rotations = 0;
+            game.currentPlayer.currentCamera = Player.CurrentCamera.a;
+            game.currentPlayer.active = false;
+            game.playState = Game.PlayState.die;
         }
+    }
+
+    public void SetMaxVibration()
+    {
+        GamePad.SetVibration(0, 1.0f, 1.0f);
+    }
+
+    public void StopVibration()
+    {
+        GamePad.SetVibration(0, 0.0f, 0.0f);
     }
 }

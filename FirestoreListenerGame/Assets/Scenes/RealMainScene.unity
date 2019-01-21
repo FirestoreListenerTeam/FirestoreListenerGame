@@ -1263,8 +1263,11 @@ MonoBehaviour:
   game: {fileID: 890663437}
   cameraController: {fileID: 2037067225}
   cameraShake: {fileID: 2037067226}
-  maxToLoad: 100
+  gameController: {fileID: 343352150}
+  minToLoad: 100
+  maxToLoad: 200
   increaseLoadPerTick: 1
+  crankCooldown: 1
   heartBeatValue: 0.25
   heartBeatTimeStep: 2
   heartBeat1: {fileID: 0}
@@ -5044,6 +5047,7 @@ MonoBehaviour:
   virtualCamera2e: {fileID: 1066651056}
   virtualCamera3e: {fileID: 163678603}
   virtualCamera4e: {fileID: 1889457656}
+  timer: 0
 --- !u!1 &2061303084
 GameObject:
   m_ObjectHideFlags: 0
