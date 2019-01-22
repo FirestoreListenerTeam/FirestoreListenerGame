@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     public GameObject chair_2;
     public GameObject chair_3;
     public GameObject chair_4;
+    public AudioManager audios;
 
     //defines
     public float box_y_spawn_position = 5f;
@@ -34,6 +35,7 @@ public class GameController : MonoBehaviour {
             {
                 box_spawned = false;
                 box_animator.SetBool("squishy", true);
+                audios.PlaySquishy();
             }
         }
 

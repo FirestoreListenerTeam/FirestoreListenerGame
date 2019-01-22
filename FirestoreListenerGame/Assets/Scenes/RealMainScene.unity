@@ -1320,6 +1320,7 @@ MonoBehaviour:
   chair_2: {fileID: 1409910270}
   chair_3: {fileID: 210820620}
   chair_4: {fileID: 1329168654}
+  audios: {fileID: 1418416422}
   box_y_spawn_position: 5
   box_y_velocity: 0.2
   box_spawned: 0
@@ -4640,6 +4641,9 @@ MonoBehaviour:
   drumRoll: {fileID: 8300000, guid: 0b34abb02cf4e0948ae5234f0e9a002c, type: 3}
   clank: {fileID: 8300000, guid: 9aaa8ac29fbc82f4bb5602320021d227, type: 3}
   explosion: {fileID: 8300000, guid: 0ceff10287817854e9d1e62b9c08ff7f, type: 3}
+  squishy: {fileID: 8300000, guid: c8f5f0a0a5c8d3c45bccd6c910f5f06e, type: 3}
+  confety: {fileID: 8300000, guid: 086a210ed7fbb1441a41492aee0ec93a, type: 3}
+  laugh: {fileID: 8300000, guid: 150753a6323e31642b8439b09561e699, type: 3}
   audioSource1: {fileID: 1418416421}
   audioSource2: {fileID: 1418416420}
   backgroundTerror: {fileID: 1418416423}
@@ -6402,7 +6406,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 6e1467504cea8f8479c57be1ab91fce2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 6e1467504cea8f8479c57be1ab91fce2, type: 3}
       propertyPath: m_LocalScale.y
