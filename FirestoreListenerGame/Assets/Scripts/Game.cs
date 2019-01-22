@@ -457,8 +457,6 @@ public class Game : MonoBehaviour
 
                 Debug.Log("waitLightOff");
 
-                box.StopShake();
-
                 if (!gameController.box_despawned)
                 {
                     timer += Time.deltaTime;
