@@ -171,6 +171,7 @@ public class Box : MonoBehaviour
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
                 // Clank rotation
 
+                /*
                 if (angle >= prevIncreasedAngle + offsetAngleDegrees || (currentZone == 1 && previousZone == 0))
                 {
                     float toIncrease = 0.0f;
@@ -183,6 +184,7 @@ public class Box : MonoBehaviour
                     xRotation = Quaternion.AngleAxis(-toIncrease, clank.transform.up) * xRotation;
                     clank.transform.rotation = xRotation;
                 }
+                */
                 //--------
 
                 if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
@@ -192,6 +194,11 @@ public class Box : MonoBehaviour
                         previousZone = 1;
                         IncreaseLoad();
                         anglesCount++;
+
+                        Quaternion xRotation = clank.transform.rotation;
+
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.oneEighth;
                 }
@@ -202,6 +209,11 @@ public class Box : MonoBehaviour
                         previousZone = 1;
                         IncreaseLoad();
                         anglesCount++;
+
+                        Quaternion xRotation = clank.transform.rotation;
+
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        clank.transform.rotation = xRotation;
                     }   
                     currentAngle = angles.twoEighth;
                 }
@@ -212,6 +224,11 @@ public class Box : MonoBehaviour
                         previousZone = 1;
                         IncreaseLoad();
                         anglesCount++;
+
+                        Quaternion xRotation = clank.transform.rotation;
+
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.threeEighth;
                 }
@@ -222,6 +239,11 @@ public class Box : MonoBehaviour
                         previousZone = 1;
                         IncreaseLoad();
                         anglesCount++;
+
+                        Quaternion xRotation = clank.transform.rotation;
+
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.fourEighth;
                 }
@@ -232,6 +254,11 @@ public class Box : MonoBehaviour
                         previousZone = 0;
                         IncreaseLoad();
                         anglesCount++;
+
+                        Quaternion xRotation = clank.transform.rotation;
+
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.fiveEighth;
                 }
@@ -242,6 +269,11 @@ public class Box : MonoBehaviour
                         previousZone = 0;
                         IncreaseLoad();
                         anglesCount++;
+
+                        Quaternion xRotation = clank.transform.rotation;
+
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.sixEighth;
                 }
@@ -252,6 +284,11 @@ public class Box : MonoBehaviour
                         previousZone = 0;
                         IncreaseLoad();
                         anglesCount++;
+
+                        Quaternion xRotation = clank.transform.rotation;
+
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.sevenEighth;
                 }
@@ -262,6 +299,11 @@ public class Box : MonoBehaviour
                         previousZone = 0;
                         IncreaseLoad();
                         anglesCount++;
+
+                        Quaternion xRotation = clank.transform.rotation;
+
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.eightEighth;
                 }
