@@ -168,10 +168,6 @@ Transform:
   m_Father: {fileID: 288022136}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &76799699 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100026, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
-  m_PrefabInternal: {fileID: 546715750}
 --- !u!1 &122907239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,7 +1173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334e61f82b9e1460fb148d68c3da2324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: 511061939}
+  box: {fileID: 1611277762}
   chair_1: {fileID: 1430368248}
   chair_2: {fileID: 1409910270}
   chair_3: {fileID: 210820620}
@@ -1505,15 +1501,15 @@ MonoBehaviour:
   gameController: {fileID: 343352150}
   minToLoad: 100
   maxToLoad: 200
-  clank: {fileID: 76799699}
+  clank: {fileID: 1611277764}
   increaseLoadPerTick: 1
   crankCooldown: 1
   heartBeatValue: 0.25
   heartBeatTimeStep: 2
   offsetAngleDegrees: 5
-  heartBeat1: {fileID: 0}
-  heartBeat2: {fileID: 0}
-  source: {fileID: 0}
+  heartBeat1: {fileID: 8300000, guid: ca66167e894bdfc4fa9e1c90dfa507e6, type: 3}
+  heartBeat2: {fileID: 8300000, guid: 80abc6770f9c4f6449177665dfd349aa, type: 3}
+  source: {fileID: 1418416421}
   can: 0
   beat: 0
 --- !u!95 &511061942
@@ -5362,6 +5358,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.3109081
       objectReference: {fileID: 0}
+    - target: {fileID: 100034, guid: e505d8b1d11da4e48ba99e3f9ddd212f, type: 3}
+      propertyPath: m_Name
+      value: REAL CLANK
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: e505d8b1d11da4e48ba99e3f9ddd212f, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: e505d8b1d11da4e48ba99e3f9ddd212f, type: 3}
@@ -5388,6 +5388,10 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1611277764 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100034, guid: e505d8b1d11da4e48ba99e3f9ddd212f, type: 3}
+  m_PrefabInternal: {fileID: 1611277761}
 --- !u!1 &1633545084
 GameObject:
   m_ObjectHideFlags: 0
