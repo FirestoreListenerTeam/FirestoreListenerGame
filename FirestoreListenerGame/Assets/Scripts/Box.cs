@@ -73,6 +73,7 @@ public class Box : MonoBehaviour
 
     void Update()
     {
+
         if (can)
         {
             if (!playerIndexSet || !prevState.IsConnected)
@@ -89,6 +90,8 @@ public class Box : MonoBehaviour
                     }
                 }
             }
+
+            TIMERGUILLERMO += Time.deltaTime;
 
             prevState = state;
             state = GamePad.GetState(playerIndex);
@@ -248,7 +251,7 @@ public class Box : MonoBehaviour
 
 
             }
-            TIMERGUILLERMO += Time.deltaTime;
+            
             if (anglesCount == 8)
             {
                 anglesCount = 0;
@@ -379,6 +382,8 @@ public class Box : MonoBehaviour
                 Debug.Log("Shake!");
             }
         }
+        else
+            TIMERGUILLERMO = 0.0f;
 
         if (beat)
             HeartVibration();      
