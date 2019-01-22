@@ -18,6 +18,8 @@ public class Game : MonoBehaviour
 {
     //UI
     public GameObject manivela_UI;
+    public GameObject joystick_UI;
+    Animator joystick_amimator;
     Animator manivela_animator;
 
     public AudioManager managerAudio;
@@ -84,6 +86,7 @@ public class Game : MonoBehaviour
     void Start()
     {
         manivela_animator = manivela_UI.GetComponent<Animator>();
+        joystick_amimator = joystick_UI.GetComponent<Animator>();
 
         players = new Player[4];
 
@@ -107,8 +110,10 @@ public class Game : MonoBehaviour
     void Update()
     {
         if(box.can){
+            joystick_amimator.SetBool("joystick_in", true);
             manivela_animator.SetBool("fade_in_manivela", true);
         }else{
+            joystick_amimator.SetBool("joystick_in", false);
             manivela_animator.SetBool("fade_in_manivela", false);
         }
 

@@ -7,6 +7,7 @@ public class Box : MonoBehaviour
     bool enterMoving = false;
     bool outMoving = false;
 
+    public BackgroundFade backgroundFade = null;
     public Game game = null;
     public CameraController cameraController = null;
     public CameraShake cameraShake = null;
@@ -34,7 +35,7 @@ public class Box : MonoBehaviour
     bool firstUpdateAxis = false;
 
     #region HeartVibVars
-    private float normalizedLoaded;
+    public float normalizedLoaded;
     private float normalizedTimeStepLoaded;
     float timerStepHeart = 0.0f;
     float timerHeartVibration = 0.0f;
@@ -277,6 +278,7 @@ public class Box : MonoBehaviour
                 anglesCount = 0;
 
                 game.currentPlayer.rotations++;
+                backgroundFade.PlayFade();
 
                 if (game.currentPlayer.rotations < 5)
                 {
@@ -408,7 +410,7 @@ public class Box : MonoBehaviour
 
     public void MaxShake()
     {
-        cameraShake.Shake(game.currentPlayer, 5.0f, 1.0f, 10.0f);
+        cameraShake.Shake(game.currentPlayer, 2.0f, 1.0f, 10.0f);
         Debug.Log("Max shake!");
     }
 
