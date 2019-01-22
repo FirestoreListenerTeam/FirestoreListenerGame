@@ -35,6 +35,11 @@ public class Game : MonoBehaviour
     public Player nextPlayer = null;
     public Player lastPlayer = null;
 
+    public ParticleSystem ps1 = null;
+    public ParticleSystem ps2 = null;
+    public ParticleSystem ps3 = null;
+    public ParticleSystem ps4 = null;
+
     public enum GameState { chooseColour, randomLights, oneLight, play };
     public GameState gameState = GameState.chooseColour;
 
@@ -315,6 +320,22 @@ public class Game : MonoBehaviour
             // Despawn box
 
             case PlayState.waitDie:
+
+                switch (currentPlayer.currentPlayer)
+                {
+                    case Player.CurrentPlayer.p1:
+                        ps1.Play();
+                        break;
+                    case Player.CurrentPlayer.p2:
+                        ps2.Play();
+                        break;
+                    case Player.CurrentPlayer.p3:
+                        ps3.Play();
+                        break;
+                    case Player.CurrentPlayer.p4:
+                        ps4.Play();
+                        break;
+                }
 
                 playState = PlayState.die;
 
