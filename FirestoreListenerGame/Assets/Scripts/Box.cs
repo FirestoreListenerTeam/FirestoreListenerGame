@@ -261,6 +261,8 @@ public class Box : MonoBehaviour
                     if (game.currentPlayer.rotations == 1)
                         Debug.Log("You can interact with the CAMERA now");
 
+                    StopShake();
+
                     // Move the camera close
                     switch (game.currentPlayer.currentPlayer)
                     {
@@ -464,7 +466,7 @@ public class Box : MonoBehaviour
             Debug.Log("You died! Next currentToLoad: " + currentToLoad);
 
             SetMaxVibration();
-            MaxShake();
+            //MaxShake();
             audioManager.StopMusicBox();
 
             // Reset variables
