@@ -18,6 +18,7 @@ public class Player
 public class Game : MonoBehaviour
 {
     //UI
+    public BackgroundFade bFade;
 
     public GameObject manivela_UI;
     public GameObject joystick_UI;
@@ -506,6 +507,8 @@ public class Game : MonoBehaviour
             case PlayState.moveCamera:
 
                 Debug.Log("moveCamera");
+
+                bFade.ClearFade();
 
                 lastPlayer = currentPlayer;
                 currentPlayer = nextPlayer;
