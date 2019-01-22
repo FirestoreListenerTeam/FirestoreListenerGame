@@ -22,8 +22,6 @@ public class Box : MonoBehaviour
     int currentZone = 0, previousZone = 0;
 
     private float currentLoaded = 0.0f;
-    bool cooldownOn = false;
-    float timerCooldown = 0.0f;
     
     float prevIncreasedAngle;
     public float offsetAngleDegrees = 2.5f;
@@ -89,8 +87,7 @@ public class Box : MonoBehaviour
             if (state.ThumbSticks.Right.X > 0.0f ||
                 state.ThumbSticks.Right.X < 0.0f ||
                 state.ThumbSticks.Right.Y > 0.0f ||
-                state.ThumbSticks.Right.Y < 0.0f &&
-                !cooldownOn)
+                state.ThumbSticks.Right.Y < 0.0f)
             {
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
 
@@ -167,8 +164,6 @@ public class Box : MonoBehaviour
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
                 // Clank rotation
 
-                
-
                 if (angle >= prevIncreasedAngle + offsetAngleDegrees || (currentZone == 1 && previousZone == 0))
                 {
                     float toIncrease = 0.0f;
@@ -178,7 +173,7 @@ public class Box : MonoBehaviour
 
                     Quaternion xRotation = clank.transform.rotation;
 
-                    xRotation = Quaternion.AngleAxis(toIncrease, new Vector3(1,0,0)) * xRotation;
+                    xRotation = Quaternion.AngleAxis(toIncrease, new Vector3(0,0,1)) * xRotation;
                     clank.transform.rotation = xRotation;
                 }
                 //--------
@@ -272,24 +267,11 @@ public class Box : MonoBehaviour
                 currentAngle = angles.noAngle;
                 currentZone = 0;
             }
-
-            //Debug.Log(currentZone);
-
-            if (cooldownOn)
-            {
-                timerCooldown += 1.0f * Time.deltaTime;
-
-                if (timerCooldown > crankCooldown)
-                {
-                    cooldownOn = false;
-                    timerCooldown = 0.0f;
-                }
-            }
+            
 
             if (anglesCount == 8)
             {
                 anglesCount = 0;
-                cooldownOn = true;
 
                 game.currentPlayer.rotations++;
 
@@ -411,7 +393,7 @@ public class Box : MonoBehaviour
             }
         }
 
-        if (beat)
+        //if (beat)
             HeartVibration();
     }
 
