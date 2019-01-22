@@ -44,7 +44,7 @@ public class MainMenuHandler : MonoBehaviour {
             }
         }
 
-        if (start_animator.GetBool("exit_in"))
+        if (exit_animator.GetBool("exit_in"))
         {
             exit_timer -= Time.deltaTime;
             if (exit_timer < 0.0f)
@@ -53,7 +53,7 @@ public class MainMenuHandler : MonoBehaviour {
                 Application.Quit();
             }
         }
-        
+
         if (!playerIndexSet || !prevState.IsConnected)
         {
             for (int i = 0; i < 4; ++i)
