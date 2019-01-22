@@ -26,8 +26,10 @@ public class Game : MonoBehaviour
     Animator choose_anim;
     Animator joystick_amimator;
     Animator manivela_animator;
+    Animator clown_animator;
 
     public AudioManager managerAudio;
+    public Knowledge knowledge = null;
 
     public GameObject choose_color_lbl;
     public GameObject choose_color_timer_lbl;
@@ -63,7 +65,8 @@ public class Game : MonoBehaviour
         interactBox,
         waitDie, die,
         waitLightOff, lightOff,
-        waitMoveCamera, moveCamera
+        waitMoveCamera, moveCamera,
+        toEndScreen
     };
     public PlayState playState = PlayState.dropBox;
 
@@ -150,6 +153,8 @@ public class Game : MonoBehaviour
                     timer = 0.0f;
                     lightsController.LightsOn();
 
+                    managerAudio.PlayDrumRoll();
+
                     gameState = GameState.randomLights;
                 }
 
@@ -159,7 +164,7 @@ public class Game : MonoBehaviour
 
                 timer += Time.deltaTime;
 
-                if (timer >= lightsSeconds)
+                if (timer >= lightsSeconds) // TODO: adjust random lights time
                 {
                     timer = 0.0f;
 
@@ -371,6 +376,7 @@ public class Game : MonoBehaviour
 
                 box.SetToDefault();
                 managerAudio.PlayExplosion();
+                clown_animator.SetBool("open", true);
 
                 playState = PlayState.die;
 
@@ -383,6 +389,8 @@ public class Game : MonoBehaviour
                 if (timer >= 2.0f)
                 {
                     timer = 0.0f;
+
+                    clown_animator.SetBool("open", false); // TODO: adjust clown time
 
                     playState = PlayState.waitLightOff;
                 }
@@ -428,6 +436,16 @@ public class Game : MonoBehaviour
                 {
                     timer = 0.0f;
 
+                    // Play again?
+                    if (AllPlayersDead())
+                    {
+                        Debug.Log("All players died...");
+                        knowledge.Winner = (int)GetWinner();
+
+                        playState = PlayState.toEndScreen;
+                        break;
+                    }
+
                     playState = PlayState.moveCamera;
                 }
 
@@ -463,6 +481,12 @@ public class Game : MonoBehaviour
                 }
 
                 playState = PlayState.waitLightOn;
+
+                break;
+
+            case PlayState.toEndScreen:
+
+                // Do nothing else
 
                 break;
         }

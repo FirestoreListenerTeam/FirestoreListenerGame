@@ -7,7 +7,6 @@ public class Box : MonoBehaviour
     bool enterMoving = false;
     bool outMoving = false;
 
-    public Knowledge knowledge = null;
     public float TIMERGUILLERMO = 0.0f;
 
     public BackgroundFade backgroundFade = null;
@@ -492,13 +491,6 @@ public class Box : MonoBehaviour
             game.currentPlayer.currentCamera = Player.CurrentCamera.a;
             game.currentPlayer.active = false;
             game.playState = Game.PlayState.waitDie;
-
-            // Play again?
-            if (game.AllPlayersDead())
-            {
-                Debug.Log("All players died...");
-                knowledge.Winner = (int)game.GetWinner();
-            }
         }
     }
 
