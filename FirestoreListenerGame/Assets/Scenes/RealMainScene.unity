@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -431,7 +431,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 163678602}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 6}
+  m_LocalPosition: {x: 0, y: 4, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 442881274}
@@ -2938,12 +2938,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45cd87853693271468e31b88072e5064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bFade: {fileID: 299196049}
   manivela_UI: {fileID: 2131145850}
   joystick_UI: {fileID: 1760480775}
   choose_lbl: {fileID: 284454018}
   choose_timer: {fileID: 1168987180}
   rb: {fileID: 66327994}
   lb: {fileID: 1023729680}
+  clown_animator: {fileID: 1611277763}
   managerAudio: {fileID: 1418416422}
   choose_color_lbl: {fileID: 284454018}
   choose_color_timer_lbl: {fileID: 1168987180}
@@ -2971,7 +2973,7 @@ MonoBehaviour:
   waitLightOnSeconds: 2
   waitDropBoxSeconds: 0.5
   waitLightOffSeconds: 1
-  waitMoveCameraSeconds: 1
+  waitMoveCameraSeconds: 0.25
 --- !u!4 &890663438
 Transform:
   m_ObjectHideFlags: 0
@@ -3231,7 +3233,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1066651055}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 3, z: 0}
+  m_LocalPosition: {x: 6, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 832296684}
@@ -5058,7 +5060,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1478530918}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -6}
+  m_LocalPosition: {x: 0, y: 4, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1830910076}
@@ -6409,7 +6411,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1889457655}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 3, z: 0}
+  m_LocalPosition: {x: -6, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 267159729}

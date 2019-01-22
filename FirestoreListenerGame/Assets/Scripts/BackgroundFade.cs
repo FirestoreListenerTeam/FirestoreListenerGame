@@ -77,4 +77,28 @@ public class BackgroundFade : MonoBehaviour
         playFade = true;
         halfFade = false;
     }
+
+    public void ClearFade()
+    {
+        Image image = null;
+        switch (game.currentPlayer.currentPlayer)
+        {
+            case Player.CurrentPlayer.p1:
+                image = green;
+                break;
+            case Player.CurrentPlayer.p2:
+                image = red;
+                break;
+            case Player.CurrentPlayer.p3:
+                image = yellow;
+                break;
+            case Player.CurrentPlayer.p4:
+                image = blue;
+                break;
+        }
+
+        Color color = image.color;
+        color.a = 0.0f;
+        image.color = color;
+    }
 }
