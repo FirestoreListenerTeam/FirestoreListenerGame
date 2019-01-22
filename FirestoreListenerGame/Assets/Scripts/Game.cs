@@ -20,6 +20,7 @@ public class Game : MonoBehaviour
     public GameObject manivela_UI;
     Animator manivela_animator;
 
+    public AudioManager managerAudio;
 
     public GameObject choose_color_lbl;
     public GameObject choose_color_timer_lbl;
@@ -347,6 +348,7 @@ public class Game : MonoBehaviour
                 }
 
                 box.SetToDefault();
+                managerAudio.PlayExplosion();
 
                 playState = PlayState.die;
 

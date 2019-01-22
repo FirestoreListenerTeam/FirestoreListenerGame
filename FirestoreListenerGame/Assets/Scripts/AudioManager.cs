@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip smokePoof;
     public AudioClip musicBox;
     public AudioClip drumRoll;
+    public AudioClip explosion;
 
     public AudioSource audioSource1;
     public AudioSource audioSource2;
@@ -28,6 +29,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySmokePoof()
     {
         audioSource1.PlayOneShot(smokePoof);
+    }
+
+    public void PlayExplosion()
+    {
+        audioSource1.PlayOneShot(explosion);
     }
 
     public void PlayMusicBox()
