@@ -18,12 +18,17 @@ public class Box : MonoBehaviour
     public float heartBeatValue = 0.25f;
     public float heartBeatTimeStep = 2.0f;
 
+    int countClank = 0;
+    int currentZone = 0, previousZone = 0;
+
     private float currentLoaded = 0.0f;
     bool cooldownOn = false;
     float timerCooldown = 0.0f;
     
     float prevIncreasedAngle;
-    float offsetAngleDegrees = 5.0f;
+    public float offsetAngleDegrees = 2.5f;
+
+    bool firstUpdateAxis = false;
 
     #region HeartVibVars
     private float normalizedLoaded;
@@ -89,25 +94,100 @@ public class Box : MonoBehaviour
             {
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
 
-                // Clank rotation
-                if (angle >= prevIncreasedAngle + offsetAngleDegrees)
-                {
-                    float toIncrease = angle - prevIncreasedAngle;
-                    prevIncreasedAngle = angle;
+              
 
-                    float yRotation = clank.transform.eulerAngles.y;
-                    yRotation += toIncrease;
-                    if (yRotation > 360)
-                        yRotation -= 360;
-
-                    transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
-                }
-                //--------
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ///
 
                 if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
                 {
                     if (currentAngle != angles.noAngle)
                     {
+                        currentZone = 1;
+                    }
+                    currentAngle = angles.oneEighth;
+                }
+                else if (angle >= 45.0f && angle < 90.0f && currentAngle != angles.twoEighth && (currentAngle == angles.noAngle || currentAngle == angles.oneEighth))
+                {
+                    if (currentAngle != angles.noAngle)
+                    {
+                        currentZone = 1;
+                    }
+                    currentAngle = angles.twoEighth;
+                }
+                else if (angle >= 90.0f && angle < 135.0f && currentAngle != angles.threeEighth && (currentAngle == angles.noAngle || currentAngle == angles.twoEighth))
+                {
+                    if (currentAngle != angles.noAngle)
+                    {
+                        currentZone = 1;
+                    }
+                    currentAngle = angles.threeEighth;
+                }
+                else if (angle >= 135.0f && angle < 180.0f && currentAngle != angles.fourEighth && (currentAngle == angles.noAngle || currentAngle == angles.threeEighth))
+                {
+                    if (currentAngle != angles.noAngle)
+                    {
+                        currentZone = 1;
+                    }
+                    currentAngle = angles.fourEighth;
+                }
+                else if (angle >= 180.0f && angle < 225.0f && currentAngle != angles.fiveEighth && (currentAngle == angles.noAngle || currentAngle == angles.fourEighth))
+                {
+                    if (currentAngle != angles.noAngle)
+                    {
+                        currentZone = 0;
+                    }
+                    currentAngle = angles.fiveEighth;
+                }
+                else if (angle >= 225.0f && angle < 270.0f && currentAngle != angles.sixEighth && (currentAngle == angles.noAngle || currentAngle == angles.fiveEighth))
+                {
+                    if (currentAngle != angles.noAngle)
+                    {
+                        currentZone = 0;
+                    }
+                    currentAngle = angles.sixEighth;
+                }
+                else if (angle >= 270.0f && angle < 315.0 && currentAngle != angles.sevenEighth && (currentAngle == angles.noAngle || currentAngle == angles.sixEighth))
+                {
+                    if (currentAngle != angles.noAngle)
+                    {
+                        currentZone = 0;
+                    }
+                    currentAngle = angles.sevenEighth;
+                }
+                else if (angle >= 315.0f && angle < 360.0f && currentAngle != angles.eightEighth && (currentAngle == angles.noAngle || currentAngle == angles.sevenEighth))
+                {
+                    if (currentAngle != angles.noAngle)
+                    {
+                        currentZone = 0;
+                    }
+                    currentAngle = angles.eightEighth;
+                }
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+                // Clank rotation
+
+                
+
+                if (angle >= prevIncreasedAngle + offsetAngleDegrees || (currentZone == 1 && previousZone == 0))
+                {
+                    float toIncrease = 0.0f;
+                    if (firstUpdateAxis)
+                        toIncrease = angle - prevIncreasedAngle;
+                    prevIncreasedAngle = angle;
+
+                    Quaternion xRotation = clank.transform.rotation;
+
+                    xRotation = Quaternion.AngleAxis(toIncrease, new Vector3(1,0,0)) * xRotation;
+
+                    clank.transform.rotation = xRotation;
+                }
+
+                if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
+                {
+                    if (currentAngle != angles.noAngle)
+                    {
+                        previousZone = 1;
                         IncreaseLoad();
                         anglesCount++;
                     }
@@ -117,15 +197,17 @@ public class Box : MonoBehaviour
                 {
                     if (currentAngle != angles.noAngle)
                     {
+                        previousZone = 1;
                         IncreaseLoad();
                         anglesCount++;
-                    }
+                    }   
                     currentAngle = angles.twoEighth;
                 }
                 else if (angle >= 90.0f && angle < 135.0f && currentAngle != angles.threeEighth && (currentAngle == angles.noAngle || currentAngle == angles.twoEighth))
                 {
                     if (currentAngle != angles.noAngle)
                     {
+                        previousZone = 1;
                         IncreaseLoad();
                         anglesCount++;
                     }
@@ -135,6 +217,7 @@ public class Box : MonoBehaviour
                 {
                     if (currentAngle != angles.noAngle)
                     {
+                        previousZone = 1;
                         IncreaseLoad();
                         anglesCount++;
                     }
@@ -144,6 +227,7 @@ public class Box : MonoBehaviour
                 {
                     if (currentAngle != angles.noAngle)
                     {
+                        previousZone = 0;
                         IncreaseLoad();
                         anglesCount++;
                     }
@@ -153,6 +237,7 @@ public class Box : MonoBehaviour
                 {
                     if (currentAngle != angles.noAngle)
                     {
+                        previousZone = 0;
                         IncreaseLoad();
                         anglesCount++;
                     }
@@ -162,6 +247,7 @@ public class Box : MonoBehaviour
                 {
                     if (currentAngle != angles.noAngle)
                     {
+                        previousZone = 0;
                         IncreaseLoad();
                         anglesCount++;
                     }
@@ -171,16 +257,23 @@ public class Box : MonoBehaviour
                 {
                     if (currentAngle != angles.noAngle)
                     {
+                        previousZone = 0;
                         IncreaseLoad();
                         anglesCount++;
                     }
                     currentAngle = angles.eightEighth;
                 }
+                
+                firstUpdateAxis = true;
             }
             else // Set to default
             {
+                firstUpdateAxis = false;
                 currentAngle = angles.noAngle;
+                currentZone = 0;
             }
+
+            //Debug.Log(currentZone);
 
             if (cooldownOn)
             {
