@@ -116,81 +116,8 @@ public class Box : MonoBehaviour
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ///
 
-                if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
-                {
-                    if (currentAngle != angles.noAngle)
-                    {
-                        currentZone = 1;
-                    }
-                }
-                else if (angle >= 45.0f && angle < 90.0f && currentAngle != angles.twoEighth && (currentAngle == angles.noAngle || currentAngle == angles.oneEighth))
-                {
-                    if (currentAngle != angles.noAngle)
-                    {
-                        currentZone = 1;
-                    }
-                }
-                else if (angle >= 90.0f && angle < 135.0f && currentAngle != angles.threeEighth && (currentAngle == angles.noAngle || currentAngle == angles.twoEighth))
-                {
-                    if (currentAngle != angles.noAngle)
-                    {
-                        currentZone = 1;
-                    }
-                }
-                else if (angle >= 135.0f && angle < 180.0f && currentAngle != angles.fourEighth && (currentAngle == angles.noAngle || currentAngle == angles.threeEighth))
-                {
-                    if (currentAngle != angles.noAngle)
-                    {
-                        currentZone = 1;
-                    }
-                }
-                else if (angle >= 180.0f && angle < 225.0f && currentAngle != angles.fiveEighth && (currentAngle == angles.noAngle || currentAngle == angles.fourEighth))
-                {
-                    if (currentAngle != angles.noAngle)
-                    {
-                        currentZone = 0;
-                    }
-                }
-                else if (angle >= 225.0f && angle < 270.0f && currentAngle != angles.sixEighth && (currentAngle == angles.noAngle || currentAngle == angles.fiveEighth))
-                {
-                    if (currentAngle != angles.noAngle)
-                    {
-                        currentZone = 0;
-                    }
-                }
-                else if (angle >= 270.0f && angle < 315.0 && currentAngle != angles.sevenEighth && (currentAngle == angles.noAngle || currentAngle == angles.sixEighth))
-                {
-                    if (currentAngle != angles.noAngle)
-                    {
-                        currentZone = 0;
-                    }
-                }
-                else if (angle >= 315.0f && angle < 360.0f && currentAngle != angles.eightEighth && (currentAngle == angles.noAngle || currentAngle == angles.sevenEighth))
-                {
-                    if (currentAngle != angles.noAngle)
-                    {
-                        currentZone = 0;
-                    }
-                }
-
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
-                // Clank rotation
-
-                /*
-                if (angle >= prevIncreasedAngle + offsetAngleDegrees || (currentZone == 1 && previousZone == 0))
-                {
-                    float toIncrease = 0.0f;
-                    if (firstUpdateAxis)
-                        toIncrease = angle - prevIncreasedAngle;
-                    prevIncreasedAngle = angle;
-
-                    Quaternion xRotation = clank.transform.rotation;
-
-                    xRotation = Quaternion.AngleAxis(-toIncrease, clank.transform.up) * xRotation;
-                    clank.transform.rotation = xRotation;
-                }
-                */
-                //--------
+                // Clank rotation             
 
                 if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
                 {
@@ -204,6 +131,7 @@ public class Box : MonoBehaviour
 
                         xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
                         clank.transform.rotation = xRotation;
+
                     }
                     currentAngle = angles.oneEighth;
                 }
@@ -293,7 +221,7 @@ public class Box : MonoBehaviour
                         Quaternion xRotation = clank.transform.rotation;
 
                         xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
-                        clank.transform.rotation = xRotation;
+                        clank.transform.rotation = xRotation;                
                     }
                     currentAngle = angles.sevenEighth;
                 }
@@ -325,6 +253,7 @@ public class Box : MonoBehaviour
             if (anglesCount == 8)
             {
                 anglesCount = 0;
+                audioManager.PlayClank();
 
                 game.currentPlayer.rotations++;
 
