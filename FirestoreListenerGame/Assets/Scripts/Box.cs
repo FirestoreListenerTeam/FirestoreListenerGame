@@ -482,6 +482,7 @@ public class Box : MonoBehaviour
 
             SetMaxVibration();
             MaxShake();
+            audioManager.StopMusicBox();
 
             // Reset variables
             switch (game.currentPlayer.currentPlayer)

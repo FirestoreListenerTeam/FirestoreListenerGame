@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641275, b: 0.5748174, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -355,11 +355,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.73
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.466
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1209,11 +1209,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.466
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.73
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1497,6 +1497,7 @@ MonoBehaviour:
   cameraController: {fileID: 2037067225}
   cameraShake: {fileID: 2037067226}
   gameController: {fileID: 343352150}
+  audioManager: {fileID: 1418416422}
   minToLoad: 100
   maxToLoad: 200
   clank: {fileID: 1611277764}
@@ -2711,6 +2712,10 @@ MonoBehaviour:
   ps2: {fileID: 1272244281}
   ps3: {fileID: 890341657}
   ps4: {fileID: 805779128}
+  chair1: {fileID: 1430368248}
+  chair2: {fileID: 1409910270}
+  chair3: {fileID: 210820620}
+  chair4: {fileID: 1329168654}
   gameState: 0
   playState: 1
   numPlayers: 0
@@ -2797,11 +2802,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.73
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.466
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4028,10 +4033,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4123,7 +4128,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4598,7 +4603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5354,11 +5359,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.466
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.73
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4266917547448304, guid: 36769d04b9f18db45831422b48a4541c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5534,7 +5539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
