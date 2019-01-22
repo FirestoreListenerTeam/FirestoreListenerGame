@@ -34,7 +34,6 @@ public class Game : MonoBehaviour
     Animator clown_animator;
 
     public AudioManager managerAudio;
-    public Knowledge knowledge = null;
 
     public GameObject choose_color_lbl;
     public GameObject choose_color_timer_lbl;
@@ -54,6 +53,10 @@ public class Game : MonoBehaviour
     public ParticleSystem ps2 = null;
     public ParticleSystem ps3 = null;
     public ParticleSystem ps4 = null;
+    public ParticleSystem sps1 = null;
+    public ParticleSystem sps2 = null;
+    public ParticleSystem sps3 = null;
+    public ParticleSystem sps4 = null;
 
     public GameObject chair1 = null;
     public GameObject chair2 = null;
@@ -407,6 +410,22 @@ public class Game : MonoBehaviour
 
                     clown_animator.SetBool("open", false); // TODO: adjust clown time
 
+                    switch (currentPlayer.currentPlayer)
+                    {
+                        case Player.CurrentPlayer.p1:
+                            sps1.Play();
+                            break;
+                        case Player.CurrentPlayer.p2:
+                            sps2.Play();
+                            break;
+                        case Player.CurrentPlayer.p3:
+                            sps3.Play();
+                            break;
+                        case Player.CurrentPlayer.p4:
+                            sps4.Play();
+                            break;
+                    }
+
                     playState = PlayState.waitLightOff;
                 }
 
@@ -455,7 +474,7 @@ public class Game : MonoBehaviour
                     if (AllPlayersDead())
                     {
                         Debug.Log("All players died...");
-                        knowledge.Winner = (int)GetWinner();
+                        Knowledge.Winner = (int)GetWinner();
 
                         playState = PlayState.toEndScreen;
                         break;
