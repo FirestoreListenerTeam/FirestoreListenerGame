@@ -9,6 +9,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip drumRoll;
     public AudioClip clank;
     public AudioClip explosion;
+    public AudioClip squishy;
+    public AudioClip confety;
+    public AudioClip laugh;
 
     public AudioSource audioSource1;
     public AudioSource audioSource2;
@@ -27,6 +30,21 @@ public class AudioManager : MonoBehaviour
     public void PlayDrumRoll()
     {
         backgroundTerror.PlayOneShot(drumRoll);
+    }
+
+    public void PlaySquishy()
+    {
+        backgroundTerror.PlayOneShot(squishy);
+    }
+
+    public void PlayConfetti()
+    {
+        backgroundTerror.PlayOneShot(confety);
+    }
+
+    public void PlayLaugh()
+    {
+        backgroundTerror.PlayOneShot(laugh);
     }
 
     public void PlaySmokePoof()
