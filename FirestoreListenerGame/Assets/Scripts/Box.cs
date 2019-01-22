@@ -7,6 +7,8 @@ public class Box : MonoBehaviour
     bool enterMoving = false;
     bool outMoving = false;
 
+    public float TIMERGUILLERMO = 0.0f;
+
     public BackgroundFade backgroundFade = null;
     public Game game = null;
     public CameraController cameraController = null;
@@ -101,6 +103,8 @@ public class Box : MonoBehaviour
                 state.ThumbSticks.Right.Y < 0.0f)
             {
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
+
+                TIMERGUILLERMO = 0.0f;
 
                 if (!firstUpdateAxis)
                     enterMoving = true;
@@ -313,6 +317,8 @@ public class Box : MonoBehaviour
             else // Set to default
             {
                 SetToDefault();
+
+                TIMERGUILLERMO += Time.deltaTime;
             }
 
             if (anglesCount == 8)
