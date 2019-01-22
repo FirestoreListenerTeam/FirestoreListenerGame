@@ -396,6 +396,9 @@ public class Game : MonoBehaviour
 
                 clown_animator.SetBool("open", true);
 
+                managerAudio.PlayLaugh();
+                managerAudio.PlayConfetti();
+
                 playState = PlayState.die;
 
                 break;
