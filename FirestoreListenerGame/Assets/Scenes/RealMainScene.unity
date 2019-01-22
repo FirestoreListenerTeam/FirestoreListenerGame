@@ -2745,6 +2745,7 @@ MonoBehaviour:
   joystick_UI: {fileID: 1760480775}
   choose_lbl: {fileID: 284454018}
   choose_timer: {fileID: 1168987180}
+  managerAudio: {fileID: 1418416422}
   choose_color_lbl: {fileID: 284454018}
   choose_color_timer_lbl: {fileID: 1168987180}
   cameraController: {fileID: 2037067225}
@@ -4289,6 +4290,7 @@ MonoBehaviour:
   smokePoof: {fileID: 8300000, guid: 13e278e2b02314040831304021e5a2d5, type: 3}
   musicBox: {fileID: 8300000, guid: 9f656f9c66e189c4ab52283b8334d2bb, type: 3}
   drumRoll: {fileID: 8300000, guid: 0b34abb02cf4e0948ae5234f0e9a002c, type: 3}
+  explosion: {fileID: 0}
   audioSource1: {fileID: 1418416421}
   audioSource2: {fileID: 1418416420}
 --- !u!1 &1430368248
@@ -6278,7 +6280,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Turn the clank!
+  m_Text: Turn the crank!
 --- !u!222 &2131145854
 CanvasRenderer:
   m_ObjectHideFlags: 0

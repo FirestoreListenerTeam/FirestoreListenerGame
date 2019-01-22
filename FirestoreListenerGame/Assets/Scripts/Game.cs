@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player
 {
@@ -19,6 +20,10 @@ public class Game : MonoBehaviour
     //UI
     public GameObject manivela_UI;
     public GameObject joystick_UI;
+    public GameObject choose_lbl;
+    public GameObject choose_timer;
+    Animator choose_anim2;
+    Animator choose_anim;
     Animator joystick_amimator;
     Animator manivela_animator;
 
@@ -51,7 +56,8 @@ public class Game : MonoBehaviour
     public enum GameState { chooseColour, randomLights, oneLight, play };
     public GameState gameState = GameState.chooseColour;
 
-    public enum PlayState {
+    public enum PlayState
+    {
         waitLightOn, lightOn,
         waitDropBox, dropBox,
         interactBox,
@@ -87,6 +93,8 @@ public class Game : MonoBehaviour
     {
         manivela_animator = manivela_UI.GetComponent<Animator>();
         joystick_amimator = joystick_UI.GetComponent<Animator>();
+        choose_anim = choose_lbl.GetComponent<Animator>();
+        choose_anim2 = choose_timer.GetComponent<Animator>();
 
         players = new Player[4];
 
@@ -109,10 +117,14 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        if(box.can){
+
+        if (box.can)
+        {
             joystick_amimator.SetBool("joystick_in", true);
             manivela_animator.SetBool("fade_in_manivela", true);
-        }else{
+        }
+        else
+        {
             joystick_amimator.SetBool("joystick_in", false);
             manivela_animator.SetBool("fade_in_manivela", false);
         }
@@ -123,13 +135,18 @@ public class Game : MonoBehaviour
         {
             case GameState.chooseColour:
 
-                // TODO: choose character
-                // TODO: FOLLOW THIS
-                //choose_color_timer_lbl.GetComponent<GUIText>()
+                choose_anim.SetBool("choose_in", true);
+                choose_anim2.SetBool("choose_in", true);
+
                 timer += Time.deltaTime;
+
+                choose_color_timer_lbl.GetComponent<Text>().text = "You have " + choose_color_timer.ToString("F0") + " seconds left";
 
                 if (choose_color_timer <= 0.0f)
                 {
+                    choose_anim.SetBool("choose_in", false);
+                    choose_anim2.SetBool("choose_in", false);
+
                     timer = 0.0f;
                     lightsController.LightsOn();
 
@@ -165,8 +182,8 @@ public class Game : MonoBehaviour
                             break;
                     }
 
-                    lightsController.LightOn(currentPlayer.currentPlayer);                   
-                    
+                    lightsController.LightOn(currentPlayer.currentPlayer);
+
                     gameState = GameState.oneLight;
                 }
 
@@ -211,7 +228,7 @@ public class Game : MonoBehaviour
 
                 break;
         }
-	}
+    }
 
     void Play()
     {
@@ -219,7 +236,7 @@ public class Game : MonoBehaviour
         {
             case PlayState.waitLightOn:
 
-                timer += Time.deltaTime;              
+                timer += Time.deltaTime;
 
                 if (timer >= waitLightOnSeconds)
                 {
