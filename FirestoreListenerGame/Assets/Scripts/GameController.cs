@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
 	void Update () {
         if(box_spawned){ // Make the box go down till the chair
             box.transform.position = new Vector3(box.transform.position.x, box.transform.position.y - box_y_velocity, box.transform.position.z);
-            if (box.transform.position.y < 1.419f)
+            if (box.transform.position.y < 1.477f)
             {
                 box_spawned = false;
                 box_animator.SetBool("squishy", true);

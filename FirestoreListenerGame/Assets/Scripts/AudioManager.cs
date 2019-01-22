@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip musicBox;
     public AudioClip drumRoll;
     public AudioClip clank;
+    public AudioClip explosion;
 
     public AudioSource audioSource1;
     public AudioSource audioSource2;
@@ -34,6 +35,11 @@ public class AudioManager : MonoBehaviour
     public void PlayClank()
     {
         audioSource1.PlayOneShot(clank);
+    }
+
+    public void PlayExplosion()
+    {
+        audioSource1.PlayOneShot(explosion);
     }
 
     public void PlayMusicBox()
