@@ -82,9 +82,17 @@ public class MainMenuHandler : MonoBehaviour {
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed && !opened_panel)
         {
             // A Pressed
-            print("A PRESSED");
-            start_btn.transform.SetAsLastSibling();
-            start_animator.SetBool("play_in", true);
+            if (opened_panel)
+            { // Any option opened
+                credits_animator.SetBool("credits_in", false);
+                how_to_play_animator.SetBool("how_to_play_in", false);
+            }
+            else
+            {
+                print("A PRESSED");
+                start_btn.transform.SetAsLastSibling();
+                start_animator.SetBool("play_in", true);
+            }
         }
 
         if (prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed)
@@ -102,15 +110,31 @@ public class MainMenuHandler : MonoBehaviour {
         if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed && !opened_panel)
         {
             // X Pressed
-            credits_btn.transform.SetAsLastSibling();
-            credits_animator.SetBool("credits_in", true);
+            if (opened_panel)
+            { // Any option opened
+                credits_animator.SetBool("credits_in", false);
+                how_to_play_animator.SetBool("how_to_play_in", false);
+            }
+            else
+            {
+                credits_btn.transform.SetAsLastSibling();
+                credits_animator.SetBool("credits_in", true);
+            }
         }
 
         if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed && !opened_panel)
         {
             // Y Pressed
-            how_to_play_btn.transform.SetAsLastSibling();
-            how_to_play_animator.SetBool("how_to_play_in", true);
+            if (opened_panel)
+            { // Any option opened
+                credits_animator.SetBool("credits_in", false);
+                how_to_play_animator.SetBool("how_to_play_in", false);
+            }
+            else
+            {
+                how_to_play_btn.transform.SetAsLastSibling();
+                how_to_play_animator.SetBool("how_to_play_in", true);
+            }
         }
 
         // MAC TEST
