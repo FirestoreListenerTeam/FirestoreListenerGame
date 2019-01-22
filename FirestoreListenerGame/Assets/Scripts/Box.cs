@@ -246,9 +246,9 @@ public class Box : MonoBehaviour
             {
                 SetToDefault();
 
-                TIMERGUILLERMO += Time.deltaTime;
-            }
 
+            }
+            TIMERGUILLERMO += Time.deltaTime;
             if (anglesCount == 8)
             {
                 anglesCount = 0;
