@@ -132,10 +132,13 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        if(cameraController.can){
+        if (cameraController.can)
+        {
             rb_anim.SetBool("rb_in", true);
             lb_anim.SetBool("lb_in", true);
-        }else{
+        }
+        else
+        {
             rb_anim.SetBool("rb_in", false);
             lb_anim.SetBool("lb_in", false);
         }

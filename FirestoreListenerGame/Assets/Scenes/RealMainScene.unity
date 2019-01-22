@@ -2920,7 +2920,7 @@ MonoBehaviour:
   gameState: 0
   playState: 1
   numPlayers: 0
-  lightsSeconds: 5
+  lightsSeconds: 4
   lightSeconds: 2
   waitLightOnSeconds: 3
   waitDropBoxSeconds: 1

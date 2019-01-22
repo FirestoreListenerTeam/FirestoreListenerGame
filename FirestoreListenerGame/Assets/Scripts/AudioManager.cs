@@ -26,22 +26,22 @@ public class AudioManager : MonoBehaviour
 
     public void PlayDrumRoll()
     {
-        audioSource1.PlayOneShot(drumRoll);
+        backgroundTerror.PlayOneShot(drumRoll);
     }
 
     public void PlaySmokePoof()
     {
-        audioSource1.PlayOneShot(smokePoof);
+        backgroundTerror.PlayOneShot(smokePoof);
     }
 
     public void PlayClank()
     {
-        audioSource1.PlayOneShot(clank);
+        backgroundTerror.PlayOneShot(clank);
     }
 
     public void PlayExplosion()
     {
-        audioSource1.PlayOneShot(explosion);
+        backgroundTerror.PlayOneShot(explosion);
     }
 
     public void PlayMusicBox()
