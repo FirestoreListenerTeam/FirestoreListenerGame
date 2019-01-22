@@ -31,7 +31,7 @@ public class Game : MonoBehaviour
     Animator choose_anim;
     Animator joystick_amimator;
     Animator manivela_animator;
-    Animator clown_animator;
+    public Animator clown_animator;
 
     public AudioManager managerAudio;
 
@@ -71,7 +71,7 @@ public class Game : MonoBehaviour
         waitLightOn, lightOn,
         waitDropBox, dropBox,
         interactBox,
-        waitDie, die,
+        waitDie, die, postDie,
         waitLightOff, lightOff,
         waitMoveCamera, moveCamera,
         toEndScreen
@@ -378,25 +378,19 @@ public class Game : MonoBehaviour
                 switch (currentPlayer.currentPlayer)
                 {
                     case Player.CurrentPlayer.p1:
-                        ps1.Play();
-                        chair1.SetActive(false);
+                        sps1.Play();
                         break;
                     case Player.CurrentPlayer.p2:
-                        ps2.Play();
-                        chair2.SetActive(false);
+                        sps2.Play();
                         break;
                     case Player.CurrentPlayer.p3:
-                        ps3.Play();
-                        chair3.SetActive(false);
+                        sps3.Play();
                         break;
                     case Player.CurrentPlayer.p4:
-                        ps4.Play();
-                        chair4.SetActive(false);
+                        sps4.Play();
                         break;
                 }
 
-                box.SetToDefault();
-                managerAudio.PlayExplosion();
                 clown_animator.SetBool("open", true);
 
                 playState = PlayState.die;
@@ -407,27 +401,49 @@ public class Game : MonoBehaviour
 
                 timer += Time.deltaTime;
 
-                if (timer >= 2.0f)
+                if (timer >= 5.0f)
                 {
                     timer = 0.0f;
-
-                    clown_animator.SetBool("open", false); // TODO: adjust clown time
 
                     switch (currentPlayer.currentPlayer)
                     {
                         case Player.CurrentPlayer.p1:
-                            sps1.Play();
+                            ps1.Play();
+                            chair1.SetActive(false);
                             break;
                         case Player.CurrentPlayer.p2:
-                            sps2.Play();
+                            ps2.Play();
+                            chair2.SetActive(false);
                             break;
                         case Player.CurrentPlayer.p3:
-                            sps3.Play();
+                            ps3.Play();
+                            chair3.SetActive(false);
                             break;
                         case Player.CurrentPlayer.p4:
-                            sps4.Play();
+                            ps4.Play();
+                            chair4.SetActive(false);
                             break;
                     }
+
+                    clown_animator.SetBool("open", false);
+                    gameController.DespawnBox();
+
+                    box.SetToDefault();
+                    box.StopVibration();
+                    managerAudio.PlayExplosion();
+
+                    playState = PlayState.postDie;
+                }
+
+                break;
+
+            case PlayState.postDie:
+
+                timer += Time.deltaTime;
+
+                if (timer >= 2.0f)
+                {
+                    timer = 0.0f;
 
                     playState = PlayState.waitLightOff;
                 }
@@ -438,7 +454,6 @@ public class Game : MonoBehaviour
 
                 Debug.Log("waitLightOff");
 
-                box.StopVibration();
                 box.StopShake();
 
                 if (!gameController.box_despawned)
