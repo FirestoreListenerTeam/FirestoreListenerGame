@@ -14,6 +14,7 @@ public class BackgroundFade : MonoBehaviour
     public Image yellow; // 3
 
     public float speed = 1.0f;
+    float realSpeed = 0.0f;
 
     bool playFade = false;
     bool halfFade = false;
@@ -41,8 +42,9 @@ public class BackgroundFade : MonoBehaviour
 
             if (!halfFade)
             {
+                realSpeed = speed * box.normalizedLoaded;
                 Color color = image.color;
-                color.a += Time.deltaTime * speed;
+                color.a += Time.deltaTime * realSpeed;
 
                 if (color.a >= box.normalizedLoaded)
                 {
@@ -54,8 +56,9 @@ public class BackgroundFade : MonoBehaviour
             }
             else
             {
+                realSpeed = speed * box.normalizedLoaded;
                 Color color = image.color;
-                color.a -= Time.deltaTime * speed;
+                color.a -= Time.deltaTime * realSpeed;
 
                 if (color.a <= 0.0f)
                 {

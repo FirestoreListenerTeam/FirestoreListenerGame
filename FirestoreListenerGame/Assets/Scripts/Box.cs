@@ -320,7 +320,6 @@ public class Box : MonoBehaviour
                 anglesCount = 0;
 
                 game.currentPlayer.rotations++;
-                backgroundFade.PlayFade();
 
                 if (game.currentPlayer.rotations < 5)
                 {
@@ -476,6 +475,7 @@ public class Box : MonoBehaviour
                 if (!heartBeatPlayed)
                 {
                     source.PlayOneShot(heartBeat1);
+                    backgroundFade.PlayFade();
                     heartBeatPlayed = true;
                 }
             }
