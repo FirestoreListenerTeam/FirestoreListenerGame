@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641275, b: 0.5748174, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334e61f82b9e1460fb148d68c3da2324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: 949559754}
+  box: {fileID: 511061939}
   chair_1: {fileID: 1430368248}
   chair_2: {fileID: 1409910270}
   chair_3: {fileID: 210820620}
@@ -996,7 +996,7 @@ MonoBehaviour:
   box_y_velocity: 0.2
   box_spawned: 0
   box_despawned: 0
-  box_animator: {fileID: 949559756}
+  box_animator: {fileID: 511061942}
 --- !u!4 &343352151
 Transform:
   m_ObjectHideFlags: 0
@@ -1229,6 +1229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 511061940}
   - component: {fileID: 511061941}
+  - component: {fileID: 511061942}
   m_Layer: 0
   m_Name: RealBox
   m_TagString: Untagged
@@ -1243,7 +1244,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 511061939}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 13.48, z: 0}
+  m_LocalPosition: {x: -2.8, y: 10.95, z: -0.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 949559755}
@@ -1278,6 +1279,24 @@ MonoBehaviour:
   source: {fileID: 0}
   can: 0
   beat: 0
+--- !u!95 &511061942
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 511061939}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3885e853bbb66429e948b83b1d1b58ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &534841113
 GameObject:
   m_ObjectHideFlags: 3
@@ -1387,15 +1406,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.094
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.74
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1625,7 +1644,8 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
   m_IsPrefabParent: 0
 --- !u!1 &552689150
@@ -2878,18 +2898,9 @@ Transform:
   m_Father: {fileID: 288022136}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &949559754 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100004, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
-  m_PrefabInternal: {fileID: 546715750}
 --- !u!4 &949559755 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: ea8ffefd68df62e46baab919001e04d5, type: 3}
-  m_PrefabInternal: {fileID: 546715750}
---- !u!95 &949559756 stripped
-Animator:
-  m_PrefabParentObject: {fileID: 9500000, guid: ea8ffefd68df62e46baab919001e04d5,
-    type: 3}
   m_PrefabInternal: {fileID: 546715750}
 --- !u!1 &1066651055
 GameObject:
