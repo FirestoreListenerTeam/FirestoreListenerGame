@@ -31,6 +31,7 @@ public class Game : MonoBehaviour
     Animator choose_anim;
     Animator joystick_amimator;
     Animator manivela_animator;
+    Animator clown_animator;
 
     public AudioManager managerAudio;
 
@@ -52,6 +53,10 @@ public class Game : MonoBehaviour
     public ParticleSystem ps2 = null;
     public ParticleSystem ps3 = null;
     public ParticleSystem ps4 = null;
+    public ParticleSystem sps1 = null;
+    public ParticleSystem sps2 = null;
+    public ParticleSystem sps3 = null;
+    public ParticleSystem sps4 = null;
 
     public GameObject chair1 = null;
     public GameObject chair2 = null;
@@ -68,7 +73,8 @@ public class Game : MonoBehaviour
         interactBox,
         waitDie, die,
         waitLightOff, lightOff,
-        waitMoveCamera, moveCamera
+        waitMoveCamera, moveCamera,
+        toEndScreen
     };
     public PlayState playState = PlayState.dropBox;
 
@@ -126,10 +132,13 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        if(cameraController.can){
+        if (cameraController.can)
+        {
             rb_anim.SetBool("rb_in", true);
             lb_anim.SetBool("lb_in", true);
-        }else{
+        }
+        else
+        {
             rb_anim.SetBool("rb_in", false);
             lb_anim.SetBool("lb_in", false);
         }
@@ -165,6 +174,8 @@ public class Game : MonoBehaviour
                     timer = 0.0f;
                     lightsController.LightsOn();
 
+                    managerAudio.PlayDrumRoll();
+
                     gameState = GameState.randomLights;
                 }
 
@@ -174,7 +185,7 @@ public class Game : MonoBehaviour
 
                 timer += Time.deltaTime;
 
-                if (timer >= lightsSeconds)
+                if (timer >= lightsSeconds) // TODO: adjust random lights time
                 {
                     timer = 0.0f;
 
@@ -386,6 +397,7 @@ public class Game : MonoBehaviour
 
                 box.SetToDefault();
                 managerAudio.PlayExplosion();
+                clown_animator.SetBool("open", true);
 
                 playState = PlayState.die;
 
@@ -398,6 +410,24 @@ public class Game : MonoBehaviour
                 if (timer >= 2.0f)
                 {
                     timer = 0.0f;
+
+                    clown_animator.SetBool("open", false); // TODO: adjust clown time
+
+                    switch (currentPlayer.currentPlayer)
+                    {
+                        case Player.CurrentPlayer.p1:
+                            sps1.Play();
+                            break;
+                        case Player.CurrentPlayer.p2:
+                            sps2.Play();
+                            break;
+                        case Player.CurrentPlayer.p3:
+                            sps3.Play();
+                            break;
+                        case Player.CurrentPlayer.p4:
+                            sps4.Play();
+                            break;
+                    }
 
                     playState = PlayState.waitLightOff;
                 }
@@ -443,6 +473,16 @@ public class Game : MonoBehaviour
                 {
                     timer = 0.0f;
 
+                    // Play again?
+                    if (AllPlayersDead())
+                    {
+                        Debug.Log("All players died...");
+                        Knowledge.Winner = (int)GetWinner();
+
+                        playState = PlayState.toEndScreen;
+                        break;
+                    }
+
                     playState = PlayState.moveCamera;
                 }
 
@@ -478,6 +518,12 @@ public class Game : MonoBehaviour
                 }
 
                 playState = PlayState.waitLightOn;
+
+                break;
+
+            case PlayState.toEndScreen:
+
+                // Do nothing else
 
                 break;
         }
