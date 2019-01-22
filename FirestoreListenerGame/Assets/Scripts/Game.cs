@@ -101,7 +101,7 @@ public class Game : MonoBehaviour
         choose_anim = choose_lbl.GetComponent<Animator>();
         choose_anim2 = choose_timer.GetComponent<Animator>();
         rb_anim = rb.GetComponent<Animator>();
-        //lb_anim = lb.GetComponent<Animator>(); 
+        lb_anim = lb.GetComponent<Animator>(); 
 
         players = new Player[4];
 
@@ -128,10 +128,10 @@ public class Game : MonoBehaviour
     {
         if(cameraController.can){
             rb_anim.SetBool("rb_in", true);
-            //lb_anim.SetBool("lb_in", true);
+            lb_anim.SetBool("lb_in", true);
         }else{
             rb_anim.SetBool("rb_in", false);
-            //lb_anim.SetBool("lb_in", false);
+            lb_anim.SetBool("lb_in", false);
         }
         if (box.can)
         {
