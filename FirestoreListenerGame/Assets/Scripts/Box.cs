@@ -128,7 +128,7 @@ public class Box : MonoBehaviour
 
                         Quaternion xRotation = clank.transform.rotation;
 
-                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.right) * xRotation;
                         clank.transform.rotation = xRotation;
 
                     }
@@ -144,7 +144,7 @@ public class Box : MonoBehaviour
 
                         Quaternion xRotation = clank.transform.rotation;
 
-                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.right) * xRotation;
                         clank.transform.rotation = xRotation;
                     }   
                     currentAngle = angles.twoEighth;
@@ -159,7 +159,7 @@ public class Box : MonoBehaviour
 
                         Quaternion xRotation = clank.transform.rotation;
 
-                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.right) * xRotation;
                         clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.threeEighth;
@@ -174,7 +174,7 @@ public class Box : MonoBehaviour
 
                         Quaternion xRotation = clank.transform.rotation;
 
-                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.right) * xRotation;
                         clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.fourEighth;
@@ -189,7 +189,7 @@ public class Box : MonoBehaviour
 
                         Quaternion xRotation = clank.transform.rotation;
 
-                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.right) * xRotation;
                         clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.fiveEighth;
@@ -204,7 +204,7 @@ public class Box : MonoBehaviour
 
                         Quaternion xRotation = clank.transform.rotation;
 
-                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.right) * xRotation;
                         clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.sixEighth;
@@ -219,7 +219,7 @@ public class Box : MonoBehaviour
 
                         Quaternion xRotation = clank.transform.rotation;
 
-                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.right) * xRotation;
                         clank.transform.rotation = xRotation;                
                     }
                     currentAngle = angles.sevenEighth;
@@ -234,7 +234,7 @@ public class Box : MonoBehaviour
 
                         Quaternion xRotation = clank.transform.rotation;
 
-                        xRotation = Quaternion.AngleAxis(-45, clank.transform.up) * xRotation;
+                        xRotation = Quaternion.AngleAxis(-45, clank.transform.right) * xRotation;
                         clank.transform.rotation = xRotation;
                     }
                     currentAngle = angles.eightEighth;
