@@ -480,4 +480,33 @@ public class Game : MonoBehaviour
 
         return count == numPlayers - 1;
     }
+
+    public uint GetWinner()
+    {
+        uint winner = 0;
+
+        for (uint i = 0; i < 4; ++i)
+        {
+            if (players[i].active)
+            {
+                switch (players[i].currentPlayer) // 1 - blue 2 - red 3 - yellow 4 - green
+                {
+                    case Player.CurrentPlayer.p1:
+                        winner = 4;
+                        break;
+                    case Player.CurrentPlayer.p2:
+                        winner = 2;
+                        break;
+                    case Player.CurrentPlayer.p3:
+                        winner = 3;
+                        break;
+                    case Player.CurrentPlayer.p4:
+                        winner = 1;
+                        break;
+                }
+            }
+        }
+
+        return winner;
+    }
 }

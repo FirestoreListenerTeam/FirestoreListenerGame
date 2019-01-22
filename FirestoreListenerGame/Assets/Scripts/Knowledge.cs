@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Knowledge : MonoBehaviour {
     
-    private static int winner; // 1 - blue 2 - red 3 - yellow 4 - green
+    private int winner; // 1 - blue 2 - red 3 - yellow 4 - green
 
-    public static int Winner
+    public int Winner
     {
         get
         {

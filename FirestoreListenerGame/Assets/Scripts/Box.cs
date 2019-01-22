@@ -7,6 +7,7 @@ public class Box : MonoBehaviour
     bool enterMoving = false;
     bool outMoving = false;
 
+    public Knowledge knowledge = null;
     public BackgroundFade backgroundFade = null;
     public Game game = null;
     public CameraController cameraController = null;
@@ -561,7 +562,7 @@ public class Box : MonoBehaviour
             if (game.AllPlayersDead())
             {
                 Debug.Log("All players died...");
-                // TODO: end of the game
+                knowledge.Winner = (int)game.GetWinner();
             }
         }
     }
