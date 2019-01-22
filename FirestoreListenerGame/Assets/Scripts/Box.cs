@@ -64,6 +64,8 @@ public class Box : MonoBehaviour
     {
         currentToLoad = Random.Range(minToLoad, maxToLoad);
         Debug.Log("Next currentToLoad: " + currentToLoad);
+
+        source.volume = 0.0f;
     }
 
     void Update()
@@ -470,6 +472,8 @@ public class Box : MonoBehaviour
         normalizedTimeStepLoaded = currentLoaded * heartBeatTimeStep / currentToLoad;
         normalizedTimeStepLoaded = heartBeatTimeStep - normalizedTimeStepLoaded;
 
+        source.volume = normalizedLoaded;
+
         // Explode?
         if (currentLoaded >= maxToLoad)
         {
@@ -521,11 +525,13 @@ public class Box : MonoBehaviour
     public void SetMaxVibration()
     {
         GamePad.SetVibration(0, 1.0f, 1.0f);
+        source.volume = 1.0f;
     }
 
     public void StopVibration()
     {
         GamePad.SetVibration(0, 0.0f, 0.0f);
+        source.volume = 0.0f;
     }
 
     public void SetToDefault()
