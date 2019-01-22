@@ -44,7 +44,7 @@ public class MainMenuHandler : MonoBehaviour {
             }
         }
 
-        if (start_animator.GetBool("exit_in"))
+        if (exit_animator.GetBool("exit_in"))
         {
             exit_timer -= Time.deltaTime;
             if (exit_timer < 0.0f)
@@ -53,7 +53,7 @@ public class MainMenuHandler : MonoBehaviour {
                 Application.Quit();
             }
         }
-        
+
         if (!playerIndexSet || !prevState.IsConnected)
         {
             for (int i = 0; i < 4; ++i)
@@ -79,7 +79,7 @@ public class MainMenuHandler : MonoBehaviour {
         if (credits_animator.GetBool("credits_in") || how_to_play_animator.GetBool("how_to_play_in"))
             opened_panel = true;
 
-        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed && !opened_panel)
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             // A Pressed
             if (opened_panel)
@@ -107,7 +107,7 @@ public class MainMenuHandler : MonoBehaviour {
             }
         }
 
-        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed && !opened_panel)
+        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed)
         {
             // X Pressed
             if (opened_panel)
@@ -122,7 +122,7 @@ public class MainMenuHandler : MonoBehaviour {
             }
         }
 
-        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed && !opened_panel)
+        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed)
         {
             // Y Pressed
             if (opened_panel)
