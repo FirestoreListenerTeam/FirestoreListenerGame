@@ -486,7 +486,6 @@ public class Box : MonoBehaviour
 
             cameraController.can = false;
             can = false;
-            gameController.DespawnBox();
             game.currentPlayer.rotations = 0;
             game.currentPlayer.currentCamera = Player.CurrentCamera.a;
             game.currentPlayer.active = false;
