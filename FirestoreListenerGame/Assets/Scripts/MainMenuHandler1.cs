@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using XInputDotNetPure;
 
 public class MainMenuHandler1 : MonoBehaviour {
 
     public GameObject start_btn;
     public GameObject exit_btn;
+
+    public GameObject winner_lbl;
 
     Animator start_animator;
     Animator exit_animator;
@@ -25,6 +28,31 @@ public class MainMenuHandler1 : MonoBehaviour {
 	void Start () {
         start_animator = start_btn.GetComponent<Animator>();
         exit_animator = exit_btn.GetComponent<Animator>();
+
+        winner_lbl.GetComponent<Text>().text = "I WIN";
+        winner_lbl.GetComponent<Text>().color = Color.gray;
+
+        switch(Knowledge.Winner){
+            case 1:
+                winner_lbl.GetComponent<Text>().text = "Blue wins";
+                winner_lbl.GetComponent<Text>().color = Color.blue;
+                break;
+            case 2:
+                winner_lbl.GetComponent<Text>().text = "Red wins";
+                winner_lbl.GetComponent<Text>().color = Color.red;
+                break;
+            case 3:
+                winner_lbl.GetComponent<Text>().text = "Yellow wins";
+                winner_lbl.GetComponent<Text>().color = Color.yellow;
+                break;
+            case 4:
+                winner_lbl.GetComponent<Text>().text = "Green wins";
+                winner_lbl.GetComponent<Text>().color = Color.green;
+                break;
+            default:
+                break;
+        }
+
 	}
 	
 	// Update is called once per frame
