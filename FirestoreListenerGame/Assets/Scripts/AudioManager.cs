@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioSource1;
     public AudioSource audioSource2;
 
+    public AudioSource backgroundTerror;
+
     void Start()
     {
         // Source 1 music

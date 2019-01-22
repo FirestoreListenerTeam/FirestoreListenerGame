@@ -18,10 +18,15 @@ public class Player
 public class Game : MonoBehaviour
 {
     //UI
+
     public GameObject manivela_UI;
     public GameObject joystick_UI;
     public GameObject choose_lbl;
     public GameObject choose_timer;
+    public GameObject rb;
+    public GameObject lb;
+    Animator rb_anim;
+    Animator lb_anim;
     Animator choose_anim2;
     Animator choose_anim;
     Animator joystick_amimator;
@@ -98,6 +103,8 @@ public class Game : MonoBehaviour
         joystick_amimator = joystick_UI.GetComponent<Animator>();
         choose_anim = choose_lbl.GetComponent<Animator>();
         choose_anim2 = choose_timer.GetComponent<Animator>();
+        rb_anim = rb.GetComponent<Animator>();
+        lb_anim = lb.GetComponent<Animator>(); 
 
         players = new Player[4];
 
@@ -116,11 +123,19 @@ public class Game : MonoBehaviour
         currentPlayer = nextPlayer = players[0];
 
         numPlayers = 4; // TODO: set num players
+
+        managerAudio.backgroundTerror.Play(); // TODO PAUSE THIS MUSIC
     }
 
     void Update()
     {
-
+        if(cameraController.can){
+            rb_anim.SetBool("rb_in", true);
+            lb_anim.SetBool("lb_in", true);
+        }else{
+            rb_anim.SetBool("rb_in", false);
+            lb_anim.SetBool("lb_in", false);
+        }
         if (box.can)
         {
             joystick_amimator.SetBool("joystick_in", true);
@@ -137,7 +152,7 @@ public class Game : MonoBehaviour
         switch (gameState)
         {
             case GameState.chooseColour:
-
+               
                 choose_anim.SetBool("choose_in", true);
                 choose_anim2.SetBool("choose_in", true);
 
