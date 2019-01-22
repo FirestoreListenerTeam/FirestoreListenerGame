@@ -18,6 +18,7 @@ public class Player
 public class Game : MonoBehaviour
 {
     //UI
+
     public GameObject manivela_UI;
     public GameObject joystick_UI;
     public GameObject choose_lbl;
@@ -119,6 +120,8 @@ public class Game : MonoBehaviour
         currentPlayer = nextPlayer = players[0];
 
         numPlayers = 4; // TODO: set num players
+
+        managerAudio.backgroundTerror.Play(); // TODO PAUSE THIS MUSIC
     }
 
     void Update()
@@ -146,7 +149,7 @@ public class Game : MonoBehaviour
         switch (gameState)
         {
             case GameState.chooseColour:
-
+               
                 choose_anim.SetBool("choose_in", true);
                 choose_anim2.SetBool("choose_in", true);
 
