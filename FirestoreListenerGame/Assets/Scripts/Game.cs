@@ -16,6 +16,11 @@ public class Player
 
 public class Game : MonoBehaviour
 {
+    //UI
+    public GameObject manivela_UI;
+    Animator manivela_animator;
+
+
     public GameObject choose_color_lbl;
     public GameObject choose_color_timer_lbl;
     float choose_color_timer = 10.0f;
@@ -67,6 +72,8 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+        manivela_animator = manivela_UI.GetComponent<Animator>();
+
         players = new Player[4];
 
         for (uint i = 0; i < 4; ++i)
@@ -88,6 +95,12 @@ public class Game : MonoBehaviour
 
     void Update()
     {
+        if(box.can){
+            manivela_animator.SetBool("fade_in_manivela", true);
+        }else{
+            manivela_animator.SetBool("fade_in_manivela", false);
+        }
+
         choose_color_timer -= Time.deltaTime;
 
         switch (gameState)
