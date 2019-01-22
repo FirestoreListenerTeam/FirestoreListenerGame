@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641275, b: 0.5748174, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1057,6 +1057,7 @@ GameObject:
   - component: {fileID: 299196047}
   - component: {fileID: 299196046}
   - component: {fileID: 299196045}
+  - component: {fileID: 299196049}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1146,6 +1147,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &299196049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 299196044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea91c345789e6c4fbe15757ff47fa20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 890663437}
+  box: {fileID: 511061941}
+  red: {fileID: 1562973113}
+  blue: {fileID: 122907241}
+  green: {fileID: 216382222}
+  yellow: {fileID: 1859201994}
+  speed: 7
 --- !u!1 &343352149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af598e85ce8c5e84c8c8bf5909757bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundFade: {fileID: 299196049}
   game: {fileID: 890663437}
   cameraController: {fileID: 2037067225}
   cameraShake: {fileID: 2037067226}
@@ -1506,6 +1526,7 @@ MonoBehaviour:
   heartBeatValue: 0.25
   heartBeatTimeStep: 2
   offsetAngleDegrees: 5
+  normalizedLoaded: 0
   heartBeat1: {fileID: 8300000, guid: ca66167e894bdfc4fa9e1c90dfa507e6, type: 3}
   heartBeat2: {fileID: 8300000, guid: 80abc6770f9c4f6449177665dfd349aa, type: 3}
   source: {fileID: 1418416421}
