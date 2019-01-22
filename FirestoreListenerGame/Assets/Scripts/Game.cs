@@ -542,6 +542,7 @@ public class Game : MonoBehaviour
             case PlayState.toEndScreen:
 
                 // Do nothing else
+                Application.LoadLevel("EndScene");
 
                 break;
         }
