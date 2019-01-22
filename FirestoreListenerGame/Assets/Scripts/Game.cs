@@ -40,6 +40,11 @@ public class Game : MonoBehaviour
     public ParticleSystem ps3 = null;
     public ParticleSystem ps4 = null;
 
+    public GameObject chair1 = null;
+    public GameObject chair2 = null;
+    public GameObject chair3 = null;
+    public GameObject chair4 = null;
+
     public enum GameState { chooseColour, randomLights, oneLight, play };
     public GameState gameState = GameState.chooseColour;
 
@@ -325,17 +330,23 @@ public class Game : MonoBehaviour
                 {
                     case Player.CurrentPlayer.p1:
                         ps1.Play();
+                        chair1.SetActive(false);
                         break;
                     case Player.CurrentPlayer.p2:
                         ps2.Play();
+                        chair2.SetActive(false);
                         break;
                     case Player.CurrentPlayer.p3:
                         ps3.Play();
+                        chair3.SetActive(false);
                         break;
                     case Player.CurrentPlayer.p4:
                         ps4.Play();
+                        chair4.SetActive(false);
                         break;
                 }
+
+                box.SetToDefault();
 
                 playState = PlayState.die;
 
@@ -345,7 +356,7 @@ public class Game : MonoBehaviour
 
                 timer += Time.deltaTime;
 
-                if (timer >= 5.0f) // TODO: PS
+                if (timer >= 2.0f)
                 {
                     timer = 0.0f;
 

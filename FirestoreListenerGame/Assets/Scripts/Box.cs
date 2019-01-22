@@ -4,11 +4,14 @@ using XInputDotNetPure;
 public class Box : MonoBehaviour
 {
     bool moving = false;
+    bool enterMoving = false;
+    bool outMoving = false;
 
     public Game game = null;
     public CameraController cameraController = null;
     public CameraShake cameraShake = null;
     public GameController gameController = null;
+    public AudioManager audioManager = null;
 
     public float minToLoad, maxToLoad = 0.0f;
     private float currentToLoad = 100.0f;
@@ -85,6 +88,9 @@ public class Box : MonoBehaviour
             prevState = state;
             state = GamePad.GetState(playerIndex);
 
+
+            outMoving = false;
+
             // Thumbstick tick
             if (state.ThumbSticks.Right.X > 0.0f ||
                 state.ThumbSticks.Right.X < 0.0f ||
@@ -92,6 +98,11 @@ public class Box : MonoBehaviour
                 state.ThumbSticks.Right.Y < 0.0f)
             {
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
+
+                if (!firstUpdateAxis)
+                    enterMoving = true;
+                else
+                    enterMoving = false;
 
                 moving = true;
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -256,12 +267,8 @@ public class Box : MonoBehaviour
             }
             else // Set to default
             {
-                firstUpdateAxis = false;
-                currentAngle = angles.noAngle;
-                currentZone = 0;
-                moving = false;
+                SetToDefault();
             }
-            
 
             if (anglesCount == 8)
             {
@@ -379,16 +386,22 @@ public class Box : MonoBehaviour
                             break;
                     }                 
                 }
-                else
-                {
-                    cameraShake.Shake(game.currentPlayer, 1.0f, 0.5f, 5.0f);
-                    Debug.Log("Shake!");
-                }
+            }
+
+            if (enterMoving)
+                audioManager.PlayMusicBox();
+            if (outMoving)
+                audioManager.StopMusicBox();
+
+            if (moving)
+            {
+                cameraShake.Shake(game.currentPlayer, 0.1f, 0.5f, 5.0f);
+                Debug.Log("Shake!");
             }
         }
 
-        //if (beat)
-            HeartVibration();
+        if (beat)
+            HeartVibration();      
     }
 
     public void MaxShake()
@@ -512,5 +525,14 @@ public class Box : MonoBehaviour
     public void StopVibration()
     {
         GamePad.SetVibration(0, 0.0f, 0.0f);
+    }
+
+    public void SetToDefault()
+    {
+        firstUpdateAxis = false;
+        currentAngle = angles.noAngle;
+        currentZone = 0;
+        moving = false;
+        outMoving = true;
     }
 }

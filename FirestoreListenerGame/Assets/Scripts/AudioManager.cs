@@ -33,10 +33,12 @@ public class AudioManager : MonoBehaviour
     public void PlayMusicBox()
     {
         audioSource2.Play();
+        Debug.Log("Play music box");
     }
 
     public void StopMusicBox()
     {
-        audioSource2.Stop();
+        audioSource2.Pause();
+        Debug.Log("Stop music box");
     }
 }
