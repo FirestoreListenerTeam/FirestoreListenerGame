@@ -1620,6 +1620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af598e85ce8c5e84c8c8bf5909757bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knowledge: {fileID: 0}
+  TIMERGUILLERMO: 0
   backgroundFade: {fileID: 299196049}
   game: {fileID: 890663437}
   cameraController: {fileID: 2037067225}
@@ -2834,6 +2836,8 @@ MonoBehaviour:
   joystick_UI: {fileID: 1760480775}
   choose_lbl: {fileID: 284454018}
   choose_timer: {fileID: 1168987180}
+  rb: {fileID: 66327994}
+  lb: {fileID: 1023729680}
   managerAudio: {fileID: 1418416422}
   choose_color_lbl: {fileID: 284454018}
   choose_color_timer_lbl: {fileID: 1168987180}
@@ -2992,6 +2996,7 @@ GameObject:
   - component: {fileID: 1023729681}
   - component: {fileID: 1023729683}
   - component: {fileID: 1023729682}
+  - component: {fileID: 1023729684}
   m_Layer: 5
   m_Name: LEFT
   m_TagString: Untagged
@@ -3050,6 +3055,24 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1023729680}
+--- !u!95 &1023729684
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1023729680}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29816c3923f6f469ab8a500a86eab3ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1066651055
 GameObject:
   m_ObjectHideFlags: 0
