@@ -179,9 +179,9 @@ public class Box : MonoBehaviour
                     Quaternion xRotation = clank.transform.rotation;
 
                     xRotation = Quaternion.AngleAxis(toIncrease, new Vector3(1,0,0)) * xRotation;
-
                     clank.transform.rotation = xRotation;
                 }
+                //--------
 
                 if (angle >= 0.0f && angle < 45.0f && currentAngle != angles.oneEighth && (currentAngle == angles.noAngle || currentAngle == angles.eightEighth))
                 {
@@ -405,18 +405,26 @@ public class Box : MonoBehaviour
                 }
                 else
                 {
-                    // Shake the camera
-                    if (cameraShake.timer <= 0.0f)
-                    {
-                        cameraShake.Shake(game.currentPlayer, 1.0f, 0.5f, 5.0f);
-                        Debug.Log("Shake!");
-                    }
+                    cameraShake.Shake(game.currentPlayer, 1.0f, 0.5f, 5.0f);
+                    Debug.Log("Shake!");
                 }
             }
         }
 
         if (beat)
             HeartVibration();
+    }
+
+    public void MaxShake()
+    {
+        cameraShake.Shake(game.currentPlayer, 5.0f, 1.0f, 10.0f);
+        Debug.Log("Max shake!");
+    }
+
+    public void StopShake()
+    {
+        cameraShake.StopShake();
+        Debug.Log("Stop shake!");
     }
 
     void HeartVibration()
@@ -477,18 +485,46 @@ public class Box : MonoBehaviour
         if (currentLoaded >= maxToLoad)
         {
             currentLoaded = 0.0f;
+            normalizedLoaded = 0.0f;
+            normalizedTimeStepLoaded = 0.0f;
             currentToLoad = Random.Range(minToLoad, maxToLoad);
 
             Debug.Log("You died! Next currentToLoad: " + currentToLoad);
 
+            SetMaxVibration();
+            MaxShake();
+
             // Reset variables
+            switch (game.currentPlayer.currentPlayer)
+            {
+                case Player.CurrentPlayer.p1:
+                    game.nextPlayer = game.players[1];
+                    break;
+                case Player.CurrentPlayer.p2:
+                    game.nextPlayer = game.players[2];
+                    break;
+                case Player.CurrentPlayer.p3:
+                    game.nextPlayer = game.players[3];
+                    break;
+                case Player.CurrentPlayer.p4:
+                    game.nextPlayer = game.players[0];
+                    break;
+            }
+
             cameraController.can = false;
             can = false;
             gameController.DespawnBox();
             game.currentPlayer.rotations = 0;
             game.currentPlayer.currentCamera = Player.CurrentCamera.a;
             game.currentPlayer.active = false;
-            game.playState = Game.PlayState.die;
+            game.playState = Game.PlayState.waitDie;
+
+            // Play again?
+            if (game.AllPlayersDead())
+            {
+                Debug.Log("All players died...");
+                // TODO: end of the game
+            }
         }
     }
 

@@ -35,6 +35,11 @@ public class LightsController : MonoBehaviour
 
     public void LightsOn()
     {
+        bool g = false;
+        bool r = false;
+        bool y = false;
+        bool b = false;
+
         for (uint i = 0; i < poolSize; ++i)
         {
             lights[i].SetActive(true);
@@ -51,17 +56,46 @@ public class LightsController : MonoBehaviour
             {
                 case 0:
                     color = Color.green;
+                    g = true;
                     break;
                 case 1:
                     color = Color.red;
+                    r = true;
                     break;
                 case 2:
                     color = Color.yellow;
+                    y = true;
                     break;
                 case 3:
                     color = Color.blue;
+                    b = true;
                     break;
             }
+
+            if (i >= poolSize - 4)
+            {
+                if (!g)
+                {
+                    color = Color.green;
+                    g = true;
+                }
+                else if (!r)
+                {
+                    color = Color.red;
+                    r = true;
+                }
+                else if (!y)
+                {
+                    color = Color.yellow;
+                    y = true;
+                }
+                else if (!b)
+                {
+                    color = Color.blue;
+                    b = true;
+                }
+            }
+
             lights[i].GetComponent<Light>().color = color;
         }
     }
