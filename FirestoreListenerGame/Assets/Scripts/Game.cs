@@ -36,6 +36,8 @@ public class Game : MonoBehaviour
 
     public AudioManager managerAudio;
 
+    public Box box_guillem;
+
     public GameObject choose_color_lbl;
     public GameObject choose_color_timer_lbl;
     float choose_color_timer = 10.0f;
@@ -143,7 +145,7 @@ public class Game : MonoBehaviour
             rb_anim.SetBool("rb_in", false);
             lb_anim.SetBool("lb_in", false);
         }
-        if (box.can)
+        if (box.can && box_guillem.TIMERGUILLERMO > 3.0f)
         {
             joystick_amimator.SetBool("joystick_in", true);
             manivela_animator.SetBool("fade_in_manivela", true);

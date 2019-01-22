@@ -3455,6 +3455,7 @@ MonoBehaviour:
   lb: {fileID: 1023729680}
   clown_animator: {fileID: 1850535046}
   managerAudio: {fileID: 1418416422}
+  box_guillem: {fileID: 511061941}
   choose_color_lbl: {fileID: 284454018}
   choose_color_timer_lbl: {fileID: 1168987180}
   cameraController: {fileID: 2037067225}
