@@ -3,6 +3,8 @@ using XInputDotNetPure;
 
 public class Box : MonoBehaviour
 {
+    bool moving = false;
+
     public Game game = null;
     public CameraController cameraController = null;
     public CameraShake cameraShake = null;
@@ -91,8 +93,7 @@ public class Box : MonoBehaviour
             {
                 float angle = FindDegree(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
 
-              
-
+                moving = true;
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ///
 
@@ -258,6 +259,7 @@ public class Box : MonoBehaviour
                 firstUpdateAxis = false;
                 currentAngle = angles.noAngle;
                 currentZone = 0;
+                moving = false;
             }
             
 
