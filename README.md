@@ -6,7 +6,7 @@ Hot Box is a video game developed in 32 hours by FirestoreListenerTeam for the G
 
 If you want to find more about the game, please check our repository:
 
-- GitHub repository: [Hot Box]https://github.com/FirestoreListenerTeam/FirestoreListenerGame
+- GitHub repository: [Hot Box](https://github.com/FirestoreListenerTeam/FirestoreListenerGame)
 
 If you want to find more about the team, please check our GitHub accounts:
 
