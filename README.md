@@ -29,10 +29,11 @@ If you want to find more about the team, please check our GitHub accounts:
 - Maya
 - Photoshop
 - Audacity
+- Aseprite
 
 ### Assets
 
-- 3D models have been made by our artist, Víctor.
+- 3D models/UI have been made by our artist, Víctor.
 - The texture used by the floor belongs to:
 	- https://3dtextures.me/2018/02/13/wood-floor-006/
 - Audio (music and FX) is from freesound.org, including:
@@ -43,4 +44,4 @@ If you want to find more about the team, please check our GitHub accounts:
 	- https://freesound.org/people/bigjoedrummer/sounds/77305/
 	- https://freesound.org/people/Planman/sounds/208111/
 	- https://freesound.org/people/seachangeau/sounds/426180/
-- UI is royalty-free.
+- Particles are royalty-free.
